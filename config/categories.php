@@ -1,4 +1,4 @@
 <?php
 return [
-    'House', 'Flat', 'Hotel', 'Villa', 'Castle', 'Cave', 'Floating house', 'Cabin', 'Agriturism', 'Trullo', 'Camping'
+    'house', 'flat', 'hotel', 'villa', 'castle', 'cave', 'floatingHouse', 'cabin', 'agriturism', 'trullo', 'camping'
 ];
