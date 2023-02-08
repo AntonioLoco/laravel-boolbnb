@@ -25,9 +25,11 @@
                                 <td>{{ $apartment->category->name }}</td>
                                 <td>
                                     @forelse ($apartment->sponsorships as $sponsor)
-                                        {{ $sponsor->name }}
+                                        @if ($sponsor->pivot->is_active)
+                                            {{ $sponsor->name }}
+                                        @endif
                                     @empty
-                                        {{ Nessuna }}
+                                        {{ 'Nessuno' }}
                                     @endforelse
                                 </td>
                                 <td>{{ $apartment->messages->count() }}</td>
