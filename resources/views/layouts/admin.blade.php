@@ -13,7 +13,8 @@
 
 <body>
 
-    <div class="wrapper-admin container-fluid">
+    <div class="wrapper-admin">
+        {{-- Header --}}
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
@@ -65,10 +66,10 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
+                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
@@ -85,14 +86,39 @@
             </nav>
         </header>
 
-        <div class="row">
-            <div class="col-2 col-md-3 bg-dark">
+        <div class="container-fluid">
+            <div class="row">
+                {{-- Sidebar --}}
+                <div class="sidebar col-2 col-md-3 bg-light">
+                    <div class="container py-5 text-center">
+                        <ul>
+                            <li>
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="d-flex justify-content-center align-items-center">
+                                    <i class="fa-solid fa-house-user"></i>
+                                    <span class="d-none d-md-block ps-4">
+                                        Dashboard
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.apartments.index') }}"
+                                    class="d-flex justify-content-center align-items-center">
+                                    <i class="fa-solid fa-list"></i>
+                                    <span class="d-none d-md-block ps-4">
+                                        Apartments
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
+                {{-- Content --}}
+                <main class="content col-10 col-md-9">
+                    @yield('content')
+                </main>
             </div>
-
-            <main class="col-10 col-md-9">
-
-            </main>
         </div>
 
     </div>

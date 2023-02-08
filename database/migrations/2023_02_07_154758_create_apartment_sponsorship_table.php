@@ -22,9 +22,10 @@ return new class extends Migration
 
             $table->primary(['apartment_id', 'sponsorship_id']);
 
-            $table->timestamps();
             $table->date('end_date');
             $table->boolean('is_active')->default(1);
+
+            $table->timestamps();
         });
     }
 
