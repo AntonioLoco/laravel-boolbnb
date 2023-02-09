@@ -20,7 +20,7 @@ class ApartmentSeeder extends Seeder
     {
         $apartments = config("apartment");
         foreach ($apartments as $apartment) {
-            $pathImage = "C:\Users\ultra\Desktop\cover_images" . $apartment['cover_image'];
+            $pathImage = "C:\Users\anton\Desktop\cover_images" . $apartment['cover_image'];
             $newApartment = Apartment::create([
                 'user_id' => $apartment['user_id'],
                 'title' => $apartment['title'],
@@ -44,9 +44,11 @@ class ApartmentSeeder extends Seeder
             ]);
             $newApartment->address()->save($newApartmentAddress);
             $newApartment->services()->attach($apartment['services']);
-            $newApartment->sponsorships()->attach($apartment['sponsorship'], [
-                'end_date' => '2023-02-04', 'is_active' => 1
-            ]);
+            if (isset($apartment['sponsorship'])) {
+                $newApartment->sponsorships()->attach($apartment['sponsorship'], [
+                    'end_date' => '2023-02-04', 'is_active' => 1
+                ]);
+            }
         }
     }
 }

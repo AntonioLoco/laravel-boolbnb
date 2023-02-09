@@ -70,6 +70,8 @@
                             @forelse ($apartment->sponsorships as $sponsor)
                                 @if ($sponsor->pivot->is_active)
                                     {{ $sponsor->name }}
+                                @else
+                                    {{ 'Nessuno' }}
                                 @endif
                             @empty
                                 {{ 'Nessuno' }}
