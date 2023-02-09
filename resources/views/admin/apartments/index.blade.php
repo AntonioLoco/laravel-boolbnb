@@ -32,17 +32,20 @@
                                         {{ 'Nessuno' }}
                                     @endforelse
                                 </td>
-                                <td>{{ $apartment->messages->count() }}</td>
+                                <td>
+                                    <i class="fa-solid fa-eye"></i>
+                                    {{ $apartment->messages->count() }}
+                                </td>
                                 <td>
                                     <ul class="d-flex m-0">
-                                        <li>
+                                        <li class="me-3">
                                             <a href="{{ route('admin.apartments.show', $apartment->slug) }}">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.apartments.edit', $apartment->slug) }}">
-                                                <i class="fa-solid fa-dog"></i>
+                                                <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                         </li>
                                         <li>
