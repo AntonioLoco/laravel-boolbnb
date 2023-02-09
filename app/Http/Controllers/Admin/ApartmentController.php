@@ -202,6 +202,18 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+        if ($apartment->cover_image) {
+            Storage::delete($apartment->cover_image);
+        }
+
+        $apartment->services()->detach();
+        $apartment->address()->delete();
+        $apartment->sponsorships()->detach();
+        $apartment->messages()->delete();
+        $apartment->views()->delete();
+
+        $apartment->delete();
+
+        return redirect()->back()->with("message", "$apartment->title è stato cancellato");
     }
 }

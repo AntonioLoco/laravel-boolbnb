@@ -38,13 +38,13 @@
                                 </td>
                                 <td>
                                     <ul class="d-flex m-0">
-                                        <li class="me-3">
-                                            <a href="{{ route('admin.apartments.show', $apartment->slug) }}">
+                                        <li>
+                                            <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.apartments.edit', $apartment->slug) }}">
+                                            <a href="{{ route('admin.apartments.edit', $apartment->slug) }}" class="btn">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                         </li>
