@@ -33,6 +33,15 @@
                                     @endforelse
                                 </td>
                                 <td>{{ $apartment->messages->count() }}</td>
+                                <td>
+                                    <ul class="d-flex m-0">
+                                        <li>
+                                            <a href="{{ route('admin.apartments.show', $apartment->slug) }}">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

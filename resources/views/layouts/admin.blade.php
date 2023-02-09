@@ -38,15 +38,9 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
-                            </li>
-                        </ul>
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav ms-auto">
                             <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
@@ -66,7 +60,8 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        <a class="dropdown-item"
+                                            href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -89,7 +84,7 @@
         <div class="container-fluid">
             <div class="row">
                 {{-- Sidebar --}}
-                <div class="sidebar col-2 col-md-3 bg-light">
+                <div class="sidebar col-2 col-md-3 bg-light h-100">
                     <div class="container py-5 text-center">
                         <ul>
                             <li>
@@ -115,7 +110,7 @@
                 </div>
 
                 {{-- Content --}}
-                <main class="content col-10 col-md-9">
+                <main class="content col-10 col-md-9 h-100 overflow-auto">
                     @yield('content')
                 </main>
             </div>

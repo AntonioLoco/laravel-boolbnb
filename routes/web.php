@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware(['auth', 'verified'])
@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-        Route::resource('apartments', ApartmentController::class);
+        Route::resource('apartments', ApartmentController::class)->parameters(["apartments" => "apartment:slug"]);
     });
 
 require __DIR__ . '/auth.php';
