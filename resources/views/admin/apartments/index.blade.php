@@ -45,6 +45,20 @@
                                                 <i class="fa-solid fa-dog"></i>
                                             </a>
                                         </li>
+                                        <li>
+                                            {{-- btn con classe delete-btn 
+                                                 data-apartment-title="{{ $apartment->title }}"
+                                        --}}
+                                            <form action="{{ route('admin.apartments.destroy', $apartment->slug) }}"
+                                                method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn delete-btn"
+                                                    data-apartment-title="{{ $apartment->title }}">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -55,4 +69,7 @@
         </div>
 
     </div>
+    {{-- Delete Modal --}}
+    @include('partials.delete-modal')
+    {{-- / Delete Modal --}}
 @endsection
