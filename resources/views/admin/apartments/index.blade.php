@@ -40,6 +40,11 @@
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('admin.apartments.edit', $apartment->slug) }}">
+                                                <i class="fa-solid fa-dog"></i>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
