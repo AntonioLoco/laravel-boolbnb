@@ -172,13 +172,13 @@
             <div class="mb-2">
                 <p>Visibile</p>
                 <div class="form-check">
-                    <input class="form-check-input @error('services') is-invalid @enderror" type="checkbox"
-                        value="1" id="visible" name="visible" @checked(old('services'))>
+                    <input class="form-check-input @error('visible') is-invalid @enderror" type="checkbox"
+                        value="1" id="visible" name="visible" @checked(old('visible'))>
                     <label class="form-check-label" for="visible">
                         Visibile
                     </label>
                 </div>
-                @error('services')
+                @error('visible')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

@@ -137,7 +137,7 @@ class ApartmentController extends Controller
         $form_data["slug"] = Helpers::generateSlug($form_data["title"]);
 
         //Se la modifica include l'immagine
-        if ($request->hasFile("image_cover")) {
+        if ($request->hasFile("cover_image")) {
             //Se il post da modificare ha già l'immagine andiamo a eliminarla
             if ($apartment->cover_image) {
                 Storage::delete($apartment->cover_image);
@@ -149,6 +149,28 @@ class ApartmentController extends Controller
 
         $apartment->update($form_data);
 
+        if (
+            $form_data["street_address"] != $apartment->address->street_address
+            || $form_data["house_number"] != $apartment->address->house_number
+            ||  $form_data["postal_code"] != $apartment->address->postal_code
+        ) {
+            //Chiamo api tomtom per latitudine e longitudine
+            $address = $form_data['street_address'] . " " . $form_data["house_number"] . " " . $form_data["postal_code"];
+            $address = urlencode($address);
+            $urlTomTom = "https://api.tomtom.com/search/2/geocode/" . $address . ".json?key=QEZMPbAxyM5B51twR2BRzWuWxSUDiBYg";
+            $response = Http::withOptions(['verify' => false])->get($urlTomTom);
+            $data = json_decode($response->body(), true);
+
+            //Setto latitudie e longitudine
+            $form_data["latitude"] = $data["results"][0]["position"]["lat"];
+            $form_data["longitude"] = $data["results"][0]["position"]["lon"];
+        } else {
+
+            //Setto latitudie e longitudine
+            $form_data["latitude"] = $apartment->address->latitude;
+            $form_data["longitude"] =  $apartment->address->longitude;
+        }
+
         $apartment->address()->update([
             'apartment_id' => $apartment->id,
             'latitude' => $form_data['latitude'],
@@ -157,6 +179,8 @@ class ApartmentController extends Controller
             'house_number' => $form_data['house_number'],
             'postal_code' => $form_data['postal_code']
         ]);
+
+        // $apartment->address()->update($newAddress);
 
         //Se riceviamo i servizi
         if ($request->has('services')) {

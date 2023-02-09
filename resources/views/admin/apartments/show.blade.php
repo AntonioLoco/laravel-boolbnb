@@ -18,7 +18,8 @@
                             <h5 class="d-inline me-4">TYPE:</h5><span>{{ $apartment->category->name }}</span>
                         </li>
                         <li class="mb-4">
-                            <h5 class="d-inline me-4">LOCATION:</h5><span>{{ $apartment->address->street_address }}</span>
+                            <h5 class="d-inline me-4">LOCATION:</h5><span>{{ $apartment->address->street_address }}
+                                {{ $apartment->address->house_number }}, {{ $apartment->address->postal_code }}</span>
                         </li>
                     </ul>
                 </div>
