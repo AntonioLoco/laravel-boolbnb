@@ -14,7 +14,7 @@ class UpdateApartmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class UpdateApartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'max:255', 'exists:apartments', Rule::unique('apartments')->ignore($this->apartment)],
+            'title' => ['required', 'max:255', Rule::unique('apartments')->ignore($this->apartment)],
             'description' => 'nullable',
             'rooms_number' => 'required|numeric',
             'beds_number' => 'required|numeric',
@@ -33,8 +33,8 @@ class UpdateApartmentRequest extends FormRequest
             'square_meters' => 'required|numeric',
             'cover_image' => 'max:255|image',
             'visible' => 'boolean',
-            'category_id' => 'exists:category,id',
-            'services' => 'exists:service,id',
+            'category_id' => 'exists:categories,id',
+            'services' => 'exists:services,id',
             'latitude' => 'numeric',
             'longitude' => 'numeric',
             'street_address' => 'max:255|required',

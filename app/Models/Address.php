@@ -11,7 +11,7 @@ class Address extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['latitude', 'longitude', 'street_address', 'house_number', 'postal_code'];
+    protected $fillable = ['apartment_id', 'latitude', 'longitude', 'street_address', 'house_number', 'postal_code'];
 
     public function apartment()
     {

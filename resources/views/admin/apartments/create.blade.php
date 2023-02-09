@@ -7,18 +7,17 @@
             fa-arrow-left"></i>
             Torna ad appartamenti
         </a>
-        <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data" id="create_form">
             @csrf
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <div class="mb-2 position-relative">
                 <label for="title">Titolo appartamento</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
@@ -39,8 +38,41 @@
                         {{ $message }}
                     </div>
                 @enderror
-
             </div>
+
+            <div class="mb-2 position-relative">
+                <label for="street_address">Indirizzo</label>
+                <input type="text" class="form-control @error('street_address') is-invalid @enderror" id="street_address"
+                    name="street_address" value="{{ old('street_address') }}">
+                @error('street_address')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="mb-2 position-relative">
+                <label for="house_number">Numero Civico</label>
+                <input type="number" class="form-control @error('house_number') is-invalid @enderror" id="house_number"
+                    name="house_number" value="{{ old('house_number') }}">
+                @error('house_number')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="mb-2 position-relative">
+                <label for="postal_code">Codice Postale</label>
+                <input type="number" class="form-control @error('postal_code') is-invalid @enderror" id="postal_code"
+                    name="postal_code" value="{{ old('postal_code') }}">
+                @error('postal_code')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
 
             <div class="mb-2 position-relative">
                 <label for="rooms_number">Numero di camere</label>
@@ -100,7 +132,8 @@
             <div class="mb-2">
                 <label for="category">Categoria</label>
                 <div>
-                    <select name="category_id" id="category" class="form-select @error('category') is-invalid @enderror">
+                    <select name="category_id" id="category_id"
+                        class="form-select @error('category_id') is-invalid @enderror">
                         <option value="">Seleziona</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
@@ -108,7 +141,7 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('category')
+                    @error('category_id')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -129,6 +162,22 @@
                         </label>
                     </div>
                 @endforeach
+                @error('services')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="mb-2">
+                <p>Visibile</p>
+                <div class="form-check">
+                    <input class="form-check-input @error('services') is-invalid @enderror" type="checkbox"
+                        value="1" id="visible" name="visible" @checked(old('services'))>
+                    <label class="form-check-label" for="visible">
+                        Visibile
+                    </label>
+                </div>
                 @error('services')
                     <div class="invalid-feedback">
                         {{ $message }}

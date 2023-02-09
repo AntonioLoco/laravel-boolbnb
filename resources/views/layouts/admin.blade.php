@@ -105,6 +105,15 @@
                                     </span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.apartments.create') }}"
+                                    class="d-flex justify-content-center align-items-center">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <span class="d-none d-md-block ps-4">
+                                        Create Apartment
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

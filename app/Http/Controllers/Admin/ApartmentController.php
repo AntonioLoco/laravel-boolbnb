@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Service;
 use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
@@ -54,10 +55,25 @@ class ApartmentController extends Controller
         //Genero lo slug
         $form_data["slug"] = Helpers::generateSlug($form_data["title"]);
 
+        //Chiamo api tomtom per latitudine e longitudine
+        $address = $form_data['street_address'] . " " . $form_data["house_number"] . " " . $form_data["postal_code"];
+        $address = urlencode($address);
+        $urlTomTom = "https://api.tomtom.com/search/2/geocode/" . $address . ".json?key=QEZMPbAxyM5B51twR2BRzWuWxSUDiBYg";
+        $response = Http::withOptions(['verify' => false])->get($urlTomTom);
+        $data = json_decode($response->body(), true);
+
+        //Setto latitudie e longitudine
+        $form_data["latitude"] = $data["results"][0]["position"]["lat"];
+        $form_data["longitude"] = $data["results"][0]["position"]["lon"];
+
         //Aggiungo l'immagine se c'è nello storage e salvo il percorso
-        if ($request->hasFile("cover_image")) {
-            $path = Storage::put("apartment_images", $form_data["cover_image"]);
-            $form_data["cover_image"] = $path;
+        $path = Storage::put("apartment_images", $form_data["cover_image"]);
+        $form_data["cover_image"] = $path;
+
+        if ($request->has('visible')) {
+            $form_data['visible'] = 1;
+        } else {
+            $form_data['visible'] = 0;
         }
 
         //Creo appartmanento
@@ -72,6 +88,7 @@ class ApartmentController extends Controller
             'house_number' => $form_data['house_number'],
             'postal_code' => $form_data['postal_code']
         ]);
+
         //Aggiungo l'indirizzo all'appartamento
         $newApartment->address()->save($newApartmentAddress);
 
@@ -143,11 +160,11 @@ class ApartmentController extends Controller
 
         //Se riceviamo i servizi
         if ($request->has('services')) {
-            //Sincronizzo le tecnologie con quelle presenti
+            //Sincronizzo le services con quelle presenti
             $apartment->services()->sync($form_data["services"]);
         } else {
-            //Rimuovo le tecnologie
-            $apartment->technologies()->detach();
+            //Rimuovo le services
+            $apartment->services()->detach();
         }
 
         return redirect()->route("admin.apartments.show", $apartment->slug)->with("message", "$apartment->title modified with success!");

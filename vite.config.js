@@ -18,7 +18,7 @@ export default defineConfig({
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
             '~fortawesome': path.resolve(__dirname, "node_modules/@fortawesome"),
             '~fontsource': path.resolve(__dirname, "node_modules/@fontsource"),
-            '~resources': '/resources/'
+            '~resources': '/resources/',
         }
     }
 });
