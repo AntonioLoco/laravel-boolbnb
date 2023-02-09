@@ -24,7 +24,7 @@ class StoreApartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255|exists:apartments',
+            'title' => 'required|max:255|unique:apartments',
             'description' => 'nullable',
             'rooms_number' => 'required|numeric',
             'beds_number' => 'required|numeric',
