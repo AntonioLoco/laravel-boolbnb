@@ -214,6 +214,6 @@ class ApartmentController extends Controller
 
         $apartment->delete();
 
-        return redirect()->back()->with("message", "$apartment->title è stato cancellato");
+        return redirect()->back()->with("message", "$apartment->title was canceled with success!");
     }
 }

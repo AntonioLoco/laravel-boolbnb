@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="apartments-show container my-5">
+        @if (session('message'))
+            <div class="alert alert-success mb-5">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="section-title text-center mb-5">
             <h5>SHOW</h5>
             <h1>{{ $apartment->title }}</h1>

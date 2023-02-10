@@ -180,8 +180,7 @@
                 @enderror
             </div>
 
-            <div class="mb-2">
-                <p>Visibile</p>
+            <div class="mb-4 pt-5">
                 <div class="form-check">
                     <input class="form-check-input @error('visible') is-invalid @enderror" type="checkbox"
                         value="1" id="visible" name="visible" @checked(old('visible', $apartment->visible))>

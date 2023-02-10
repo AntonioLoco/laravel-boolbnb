@@ -2,9 +2,15 @@
 
 @section('content')
     <div class="container py-5 text-center">
+        @if (session('message'))
+            <div class="alert alert-success my-3">
+                {{ session('message') }}
+            </div>
+        @endif
+
         <h1>Ecco i tuoi appartamenti</h1>
 
-        <div class="row justify-content-center mt-4">
+        <div class="row justify-content-center mt-5">
             <div class="col-9">
                 <table class="table">
                     <thead>
