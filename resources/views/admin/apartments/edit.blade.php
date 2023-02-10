@@ -124,6 +124,13 @@
                 <label for="cover_image">Immagine</label>
                 <input type="file" class="form-control @error('cover_image') is-invalid @enderror" id='cover_image'
                     name="cover_image" value="{{ old('cover_image') }}">
+
+                {{-- Image Preview --}}
+                <div class="mt-3 mb-3 w-50" style="max-width: 400px">
+                    <img class="w-50 rounded-4" id="image_preview" src="{{ asset('storage/' . $apartment->cover_image) }}"
+                        alt="{{ $apartment->title . 'Cover Image' }}">
+                </div>
+
                 @error('cover_image')
                     <div class="invalid-feedback">
                         {{ $message }}

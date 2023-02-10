@@ -118,10 +118,16 @@
                 @enderror
             </div>
 
-            <div>
+            <div class="mb-2">
                 <label for="cover_image">Immagine</label>
                 <input type="file" class="form-control @error('cover_image') is-invalid @enderror" id='cover_image'
                     name="cover_image" value="{{ old('cover_image') }}">
+
+                {{-- Image Preview --}}
+                <div class="mt-3 mb-3 w-50" style="max-width: 400px">
+                    <img class="w-50 rounded-4" id="image_preview" src="" alt="">
+                </div>
+
                 @error('cover_image')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -170,7 +176,6 @@
             </div>
 
             <div class="mb-2">
-                <p>Visibile</p>
                 <div class="form-check">
                     <input class="form-check-input @error('visible') is-invalid @enderror" type="checkbox"
                         value="1" id="visible" name="visible" @checked(old('visible'))>
