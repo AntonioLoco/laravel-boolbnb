@@ -36,7 +36,7 @@ class ApartmentController extends Controller
                 ->selectRaw("apartments.*, ( 6371 * acos( cos( radians({$latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$longitude}) ) + sin( radians({$latitude}) ) * sin( radians( latitude ) ) ) ) AS distance")
                 ->havingRaw("distance < {$range}")->get();
         } else {
-            $apartments = Apartment::with(['services']);
+            $apartments = Apartment::with(['services'])->get();
         }
 
         $categories = Category::all();
