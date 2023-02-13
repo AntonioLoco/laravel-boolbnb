@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Category;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -54,17 +55,20 @@ class ApartmentController extends Controller
                 });
             }
 
-            $apartments = $apartments->get();
+            $apartments = $apartments->orderBy('distance')->get();
         } else {
             $apartments = Apartment::with(['services', 'address'])->get();
         }
 
         $categories = Category::all();
 
+        $services = Service::all();
+
         return response()->json([
             "success" => true,
             "apartments" => $apartments,
-            "categories" => $categories
+            "categories" => $categories,
+            'services' => $services
         ]);
     }
 
