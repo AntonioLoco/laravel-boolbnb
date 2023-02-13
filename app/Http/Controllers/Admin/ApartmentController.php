@@ -57,14 +57,18 @@ class ApartmentController extends Controller
 
         //Chiamo api tomtom per latitudine e longitudine
         $address = $form_data['street_address'] . " " . $form_data["house_number"] . " " . $form_data["postal_code"];
-        $address = urlencode($address);
-        $urlTomTom = "https://api.tomtom.com/search/2/geocode/" . $address . ".json?key=QEZMPbAxyM5B51twR2BRzWuWxSUDiBYg";
+        $addressApi = urlencode($address);
+        $urlTomTom = "https://api.tomtom.com/search/2/geocode/" . $addressApi . ".json?key=QEZMPbAxyM5B51twR2BRzWuWxSUDiBYg";
         $response = Http::withOptions(['verify' => false])->get($urlTomTom);
         $data = json_decode($response->body(), true);
 
-        //Setto latitudie e longitudine
-        $form_data["latitude"] = $data["results"][0]["position"]["lat"];
-        $form_data["longitude"] = $data["results"][0]["position"]["lon"];
+        if ($data["summary"]["totalResults"] == 1) {
+            //Setto latitudie e longitudine
+            $form_data["latitude"] = $data["results"][0]["position"]["lat"];
+            $form_data["longitude"] = $data["results"][0]["position"]["lon"];
+        } else {
+            return back()->withErrors("$address non è un indirizzo valido!")->withInput();
+        }
 
         //Aggiungo l'immagine se c'è nello storage e salvo il percorso
         $path = Storage::put("apartment_images", $form_data["cover_image"]);
@@ -156,16 +160,21 @@ class ApartmentController extends Controller
         ) {
             //Chiamo api tomtom per latitudine e longitudine
             $address = $form_data['street_address'] . " " . $form_data["house_number"] . " " . $form_data["postal_code"];
-            $address = urlencode($address);
-            $urlTomTom = "https://api.tomtom.com/search/2/geocode/" . $address . ".json?key=QEZMPbAxyM5B51twR2BRzWuWxSUDiBYg";
+            $addressApiUpdate = urlencode($address);
+            $urlTomTom = "https://api.tomtom.com/search/2/geocode/" . $addressApiUpdate . ".json?key=QEZMPbAxyM5B51twR2BRzWuWxSUDiBYg";
             $response = Http::withOptions(['verify' => false])->get($urlTomTom);
             $data = json_decode($response->body(), true);
 
-            //Setto latitudie e longitudine
-            $form_data["latitude"] = $data["results"][0]["position"]["lat"];
-            $form_data["longitude"] = $data["results"][0]["position"]["lon"];
-        } else {
+            dd($data);
 
+            if ($data["summary"]["totalResults"] == 1) {
+                //Setto latitudie e longitudine
+                $form_data["latitude"] = $data["results"][0]["position"]["lat"];
+                $form_data["longitude"] = $data["results"][0]["position"]["lon"];
+            } else {
+                return back()->withErrors("$address non è un indirizzo valido!")->withInput();
+            }
+        } else {
             //Setto latitudie e longitudine
             $form_data["latitude"] = $apartment->address->latitude;
             $form_data["longitude"] =  $apartment->address->longitude;
