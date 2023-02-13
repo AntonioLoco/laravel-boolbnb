@@ -21,7 +21,7 @@ class ApartmentSeeder extends Seeder
         $apartments = config("apartment");
         foreach ($apartments as $apartment) {
 
-            $pathImage = "C:\Users\ultra\Desktop\cover_images" . $apartment['cover_image'];
+            $pathImage = "C:\Users\hp\OneDrive\Desktop\Immagini a caso\cover_images" . $apartment['cover_image'];
             $newApartment = Apartment::create([
                 'user_id' => $apartment['user_id'],
                 'title' => $apartment['title'],

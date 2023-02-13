@@ -24,6 +24,7 @@ class ApartmentController extends Controller
             $latitude = $data["results"][0]["position"]["lat"];
             $longitude = $data["results"][0]["position"]["lon"];
 
+            // checking the range 
             if ($request->has("range")) {
                 $range = $request->range;
             } else {
@@ -34,9 +35,28 @@ class ApartmentController extends Controller
             $apartments = Apartment::with(['services'])
                 ->join('addresses', 'apartments.id', '=', 'addresses.apartment_id')
                 ->selectRaw("apartments.*, ( 6371 * acos( cos( radians({$latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$longitude}) ) + sin( radians({$latitude}) ) * sin( radians( latitude ) ) ) ) AS distance")
-                ->havingRaw("distance < {$range}")->get();
+                ->havingRaw("distance < {$range}");
+
+            if ($request->has('rooms_number')) {
+                $rooms_number = $request->rooms_number;
+                $apartments = $apartments->where('rooms_number', '>=', $rooms_number);
+            }
+
+            if ($request->has('beds_number')) {
+                $beds_number = $request->beds_number;
+                $apartments = $apartments->where('beds_number', '=>', $beds_number);
+            }
+
+            if ($request->has('services')) {
+                $services = $request->services;
+                $apartments = $apartments->whereHas('services', function ($query) use ($services) {
+                    $query->whereIn('id', $services);
+                });
+            }
+
+            $apartments = $apartments->get();
         } else {
-            $apartments = Apartment::with(['services'])->get();
+            $apartments = Apartment::with(['services', 'address'])->get();
         }
 
         $categories = Category::all();
@@ -46,5 +66,22 @@ class ApartmentController extends Controller
             "apartments" => $apartments,
             "categories" => $categories
         ]);
+    }
+
+    public function show($slug)
+    {
+        $apartment = Apartment::with(['services', 'address'])->where('slug', $slug)->first();
+
+        if ($apartment) {
+            return response()->json([
+                "success" => true,
+                "apartment" => $apartment,
+            ]);
+        } else {
+            return response()->json([
+                'succes' => false,
+                'error' => 'Niente da da fare non ho trovato niente'
+            ]);
+        }
     }
 }
