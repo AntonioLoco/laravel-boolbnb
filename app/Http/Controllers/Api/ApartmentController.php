@@ -45,7 +45,7 @@ class ApartmentController extends Controller
 
             if ($request->has('beds_number')) {
                 $beds_number = $request->beds_number;
-                $apartments = $apartments->where('beds_number', '=>', $beds_number);
+                $apartments = $apartments->where('beds_number', '>=', $beds_number);
             }
 
             if ($request->has('services')) {
