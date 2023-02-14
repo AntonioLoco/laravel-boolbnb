@@ -78,8 +78,8 @@
                                         </span>
                                     @enderror
 
-                                    <span class="invalid-feedback d-none" role="alert" id="alert-email">
-                                        <strong>Email errata, inserisci un email valida</strong>
+                                    <span class="invalid-feedback d-block d-none" role="alert" id="alert-email">
+                                        <strong>The email is incorrect!</strong>
                                     </span>
                                 </div>
                             </div>
@@ -99,8 +99,8 @@
                                         </span>
                                     @enderror
 
-                                    <span class="invalid-feedback d-none" role="alert" id="alert-password-first">
-                                        <strong id="alert-password-text"></strong>
+                                    <span class="invalid-feedback d-block d-none" role="alert" id="alert-password-first">
+                                        <strong id="text-alert-password-first"></strong>
                                     </span>
                                 </div>
                             </div>
@@ -113,8 +113,9 @@
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" autocomplete="new-password">
 
-                                    <span class="invalid-feedback d-none" role="alert" id="alert-password">
-                                        <strong id="alert-password-text"></strong>
+                                    <span class="invalid-feedback d-block d-none" role="alert"
+                                        id="alert-password-confirm">
+                                        <strong id="text-alert-password-confirm"></strong>
                                     </span>
                                 </div>
                             </div>
@@ -139,47 +140,75 @@
             return /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(email);
         }
 
-        let form = document.querySelector('#formRegister');
-        let alertEmail = document.getElementById("alert-email");
-        let alertPassword = document.getElementById("alert-password");
-        let alertPasswordFirst = document.getElementById("alert-password-first");
-        let alertPasswordText = document.getElementById("alert-password-text")
+        //Input
+        const form = document.querySelector('#formRegister');
+        const passwordFirst = document.getElementById("password");
+        const passwordConfirm = document.getElementById("password-confirm");
 
-        //al click: prevent + console 
+        //Contenitore errore
+        let alertEmail = document.getElementById("alert-email");
+        let alertPasswordFirst = document.getElementById("alert-password-first");
+        let alertPasswordConfirm = document.getElementById("alert-password-confirm");
+
+        //Messaggio errore password
+        let textAlertPasswordFirst = document.getElementById("text-alert-password-first");
+        let textAlertPasswordConfirm = document.getElementById("text-alert-password-confirm");
+
+
         form.addEventListener('submit', (event) => {
             event.preventDefault();
-            document.getElementById("password-confirm").classList.remove("is-invalid");
-            document.getElementById("email").classList.remove("is-invalid");
+
+            //Rimuovo tutti gli errori
+            email.classList.remove("is-invalid");
+            alertEmail.classList.add("d-none");
+
+            passwordFirst.classList.remove("is-invalid");
+            alertPasswordFirst.classList.add("d-none");
+
+            passwordConfirm.classList.remove("is-invalid");
+            alertPasswordConfirm.classList.add("d-none");
+
 
 
             //prendo valore dell'input            
-            let inputEmail = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-            const passwordConfirm = document.getElementById("password-confirm").value;
+            const inputEmail = email.value;
+            const password = passwordFirst.value;
+            const passwordConfirmValue = passwordConfirm.value;
 
 
             //if ERRORE - else CORRETTA
-            if (!isEmail(inputEmail) && (password !== passwordConfirm)) {
-                console.log('email errata e password errata');
-                document.getElementById("email").classList.add("is-invalid");
-                document.getElementById("password-confirm").classList.add("is-invalid");
+            if (!isEmail(inputEmail) && (password !== passwordConfirmValue)) {
+                //Mostro errore email
+                email.classList.add("is-invalid");
                 alertEmail.classList.remove("d-none");
-                alertPasswordText.innerText = "La password non combacia";
-                alertPassword.classList.remove("d-none");
-                return
+
+                //Mostro errore password conferma
+                passwordConfirm.classList.add("is-invalid");
+                textAlertPasswordConfirm.innerText = "The password does not match";
+                alertPasswordConfirm.classList.remove("d-none");
+            } else if (!isEmail(inputEmail) && (password.length < 8)) {
+                //Mostro errore email
+                email.classList.add("is-invalid");
+                alertEmail.classList.remove("d-none");
+                //Mostro errore password 
+                passwordFirst.classList.add("is-invalid");
+                textAlertPasswordFirst.innerText = "The password is not valid! Enter at least 8 characters.";
+                alertPasswordFirst.classList.remove("d-none");
+
             } else if (!isEmail(inputEmail)) {
-                console.log('email errata');
-                document.querySelector('#email').focus();
-                document.getElementById("email").classList.add("is-invalid");
+                email.focus();
+                email.classList.add("is-invalid");
                 alertEmail.classList.remove("d-none");
-            } else if (password !== passwordConfirm) {
-                document.querySelector('#password-confirm').focus();
-                document.getElementById("password-confirm").classList.add("is-invalid");
-                alertPasswordText.innerText = "La password non combacia";
-                alertPassword.classList.remove("d-none");
-            } else if (password.length < 5) {
-                document.getElementById("password").classList.add("is-invalid");
-                alertPasswordText.innerText = "La password non è valida";
+
+            } else if (password !== passwordConfirmValue) {
+                passwordConfirm.focus();
+                passwordConfirm.classList.add("is-invalid");
+                textAlertPasswordConfirm.innerText = "The password does not match";
+                alertPasswordConfirm.classList.remove("d-none");
+
+            } else if (password.length < 8) {
+                passwordFirst.classList.add("is-invalid");
+                textAlertPasswordFirst.innerText = "The password is not valid! Enter at least 8 characters.";
                 alertPasswordFirst.classList.remove("d-none");
             } else {
                 form.submit();

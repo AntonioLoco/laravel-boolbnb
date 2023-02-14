@@ -19,6 +19,9 @@
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <span class="invalid-feedback d-block d-none" role="alert" id="invalid-message-email">
+                                        <strong>The email is incorrect!</strong>
+                                    </span>
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -42,6 +45,11 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+
+                                    <span class="invalid-feedback d-block d-none" role="alert"
+                                        id="invalid-message-password">
+                                        <strong>The password in incorrect!</strong>
+                                    </span>
                                 </div>
                             </div>
 
@@ -63,12 +71,6 @@
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Login') }}
                                     </button>
-                                    {{-- 
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                                @endif --}}
                                 </div>
                             </div>
                         </form>
@@ -85,23 +87,43 @@
         }
 
         let form = document.querySelector('#formLogin');
+        let emailInput = document.getElementById("email");
+        let invalidMessageEmail = document.getElementById("invalid-message-email");
+
+        let passwordInput = document.getElementById("password");
+        let invalidMessagePassoword = document.getElementById("invalid-message-password");
 
         //al click: prevent + console 
         form.addEventListener('submit', (event) => {
             event.preventDefault();
+            emailInput.classList.remove("is-invalid");
+            invalidMessageEmail.classList.add("d-none");
+
+            passwordInput.classList.remove("is-invalid");
+            invalidMessagePassoword.classList.add("d-none");
 
             //prendo valore dell'input            
-            let inputEmail = document.getElementById("email").value;
-            console.log(inputEmail);
+            let inputEmailValue = emailInput.value;
+            let passwordValue = passwordInput.value;
 
             //if ERRORE - else CORRETTA
-            if (isEmail(inputEmail) === false) {
-                console.log('email errata');
-                document.querySelector('#email').focus();
-                document.getElementById("email").classList.add("is-invalid");
-                return
+            if (!isEmail(inputEmailValue) && passwordValue.length < 8) {
+                emailInput.focus();
+                emailInput.classList.add("is-invalid");
+                invalidMessageEmail.classList.remove("d-none");
+
+                passwordInput.classList.add("is-invalid");
+                invalidMessagePassoword.classList.remove("d-none");
+            } else if (!isEmail(inputEmailValue)) {
+                emailInput.focus();
+                emailInput.classList.add("is-invalid");
+                invalidMessageEmail.classList.remove("d-none");
+
+            } else if (passwordValue.length < 8) {
+                passwordInput.focus();
+                passwordInput.classList.add("is-invalid");
+                invalidMessagePassoword.classList.remove("d-none");
             } else {
-                console.log('email fatta');
                 form.submit();
             }
         });
