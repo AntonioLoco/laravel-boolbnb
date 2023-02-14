@@ -29,10 +29,11 @@
                     <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data"
                         id="create_apartment_form">
                         @csrf
-                        <div class="mb-3 py-5 border-bottom border-2 d-lg-flex align-items-center justify-content-between">
-                            <label for="title">Title Apartment</label>
+
+                        <div class=" py-4 border-bottom border-2 d-lg-flex align-items-center justify-content-between">
+                            <label for="title">Title</label>
                             <input type="text"
-                                class="form-control @error('title') is-invalid @enderror w-75 mt-3 mt-lg-0" id="title"
+                                class="form-control @error('title') is-invalid @enderror w-75  mt-3 mt-lg-0" id="title"
                                 name="title" value="{{ old('title') }}">
                             @error('title')
                                 <div class="invalid-feedback">
@@ -41,8 +42,9 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3 py-5 border-bottom border-2 d-lg-flex align-items-center justify-content-between">
-                            <label for="description">Descrizione</label>
+
+                        <div class="py-4 border-bottom border-2 d-lg-flex align-items-center justify-content-between">
+                            <label for="description">Description</label>
                             <textarea class="form-control @error('description') is-invalid @enderror w-75 mt-3 mt-lg-0" name="description"
                                 id="description" rows="10">{{ old('description') }}</textarea>
                             @error('description')
@@ -52,9 +54,9 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3 py-5 border-bottom border-2">
-                            <div class="mb-5 d-lg-flex align-items-center justify-content-between">
-                                <label for="street_address">Indirizzo</label>
+                        <div class="py-4 border-bottom border-2">
+                            <div class="mb-4 d-lg-flex align-items-center justify-content-between">
+                                <label for="street_address">Address</label>
                                 <input type="text"
                                     class="form-control @error('street_address') is-invalid @enderror  w-75 mt-3 mt-lg-0"
                                     id="street_address" name="street_address" value="{{ old('street_address') }}">
@@ -64,37 +66,39 @@
                                     </div>
                                 @enderror
                             </div>
+                            <div>
 
-                            <div class="d-lg-flex justify-content-between">
-                                <div class="mb-3 d-lg-flex align-items-center">
-                                    <label for="house_number">Numero Civico</label>
-                                    <input type="number"
-                                        class="form-control @error('house_number') is-invalid @enderror  w-25 mt-3 mt-lg-0 ms-lg-3"
-                                        id="house_number" name="house_number" value="{{ old('house_number') }}">
-                                    @error('house_number')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
+                                <div class="d-lg-flex justify-content-lg-between d-sm-block">
+                                    <div class="d-lg-flex align-items-center mb-sm-3 mb-lg-0">
+                                        <label for="house_number">House Number</label>
+                                        <input type="number"
+                                            class="form-control @error('house_number') is-invalid @enderror  w-25 mt-3 mt-lg-0 ms-lg-3"
+                                            id="house_number" name="house_number" value="{{ old('house_number') }}">
+                                        @error('house_number')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
 
-                                <div class="mb-3 d-lg-flex align-items-center">
-                                    <label for="postal_code">Codice Postale</label>
-                                    <input type="number"
-                                        class="form-control @error('postal_code') is-invalid @enderror  w-25 mt-3 mt-lg-0 ms-lg-3"
-                                        id="postal_code" name="postal_code" value="{{ old('postal_code') }}">
-                                    @error('postal_code')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                    <div class="d-lg-flex align-items-center">
+                                        <label for="postal_code">Postal Code</label>
+                                        <input type="number"
+                                            class="form-control @error('postal_code') is-invalid @enderror  w-25 mt-3 mt-lg-0 ms-lg-3"
+                                            id="postal_code" name="postal_code" value="{{ old('postal_code') }}">
+                                        @error('postal_code')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="mb-3 py-5 border-bottom border-2 d-lg-flex justify-content-between flex-wrap">
+                        <div class="py-4 border-bottom border-2 d-lg-flex justify-content-between flex-wrap">
                             <div class="mb-3 d-lg-flex align-items-center">
-                                <label for="rooms_number">Numero di camere</label>
+                                <label for="rooms_number">Rooms Number</label>
                                 <input type="number"
                                     class="form-control @error('rooms_number') is-invalid @enderror w-25 mt-3 mt-lg-0 ms-lg-3"
                                     id="rooms_number" name="rooms_number" value="{{ old('rooms_number') }}">
@@ -106,7 +110,7 @@
                             </div>
 
                             <div class="mb-3 d-lg-flex align-items-center">
-                                <label for="bathrooms_number">Numero di bagni</label>
+                                <label for="bathrooms_number">Bathrooms Number</label>
                                 <input type="number"
                                     class="form-control @error('bathrooms_number') is-invalid @enderror w-25 mt-3 mt-lg-0 ms-lg-3"
                                     id="bathrooms_number" name="bathrooms_number" value="{{ old('bathrooms_number') }}">
@@ -118,7 +122,7 @@
                             </div>
 
                             <div class="mb-3 d-lg-flex align-items-center">
-                                <label for="beds_number">Numero di letti</label>
+                                <label for="beds_number">Beds Number</label>
                                 <input type="number"
                                     class="form-control @error('beds_number') is-invalid @enderror w-25 mt-3 mt-lg-0 ms-lg-3"
                                     id="beds_number" name="beds_number" value="{{ old('beds_number') }}">
@@ -129,8 +133,8 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3 d-lg-flex align-items-center">
-                                <label for="square_meters">Metri quadrati</label>
+                            <div class=" d-lg-flex align-items-center">
+                                <label for="square_meters">Square Meters</label>
                                 <input type="number"
                                     class="form-control @error('square_meters') is-invalid @enderror w-25 mt-3 mt-lg-0 ms-lg-3"
                                     id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
@@ -142,15 +146,16 @@
                             </div>
                         </div>
 
-                        <div class="mb-3 py-5 border-bottom border-2">
-                            <label for="cover_image">Immagine</label>
+                        <div class="py-4 border-bottom border-2">
+                            <label for="cover_image">Cover Image</label>
                             <input type="file" class="form-control @error('cover_image') is-invalid @enderror mt-3"
                                 id='cover_image' name="cover_image" value="{{ old('cover_image') }}">
 
                             {{-- Image Preview --}}
-                            <div class="mt-3 mb-3 w-50" style="max-width: 400px">
+                            <div class="mt-3 w-50" style="max-width: 400px">
                                 <img class="w-50 rounded-4" id="image_preview" src="" alt="">
                             </div>
+
                             @error('cover_image')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -158,10 +163,10 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3 py-5 border-bottom border-2 d-lg-flex align-items-center">
-                            <label for="category">Categoria</label>
+                        <div class="py-4 border-bottom border-2 d-lg-flex align-items-center justify-content-between">
+                            <label for="category">Category</label>
                             <select name="category_id" id="category_id"
-                                class="form-select @error('category_id') is-invalid @enderror w-50 mt-3 mt-lg-0 ms-lg-3">
+                                class="form-select @error('category_id') is-invalid @enderror w-75 mt-3 mt-lg-0">
                                 <option value="">Seleziona</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
@@ -177,21 +182,27 @@
                         </div>
 
 
-                        <div class="mb-3 py-5 border-bottom border-2">
-                            <p>Servizi</p>
+                        <div class="py-4 border-bottom border-2">
+                            <p>Services</p>
                             <div class="invalid-feedback d-none" id="error-services">
-                                <strong> Aggiungi almeno un servizio </strong>
+                                <strong> Add at least one service </strong>
                             </div>
-                            @foreach ($services as $service)
-                                <div class="form-check">
-                                    <input class="form-check-input check-service @error('services') is-invalid @enderror"
-                                        type="checkbox" value="{{ $service->id }}" id="service-{{ $service->id }}"
-                                        name="services[]" @checked(in_array($service->id, old('services', [])))>
-                                    <label class="form-check-label" for="service-{{ $service->id }}">
-                                        {{ $service->name }}
-                                    </label>
+                            <div class="container">
+                                <div class="d-md-flex flex-md-wrap">
+                                    @foreach ($services as $service)
+                                        <div class="form-check me-3 mt-2">
+                                            <input
+                                                class="form-check-input check-service @error('services') is-invalid @enderror"
+                                                type="checkbox" value="{{ $service->id }}"
+                                                id="service-{{ $service->id }}" name="services[]"
+                                                @checked(in_array($service->id, old('services', [])))>
+                                            <label class="form-check-label" for="service-{{ $service->id }}">
+                                                {{ $service->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
+                            </div>
                             @error('services')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -199,12 +210,13 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3 py-5 border-bottom border-2">
-                            <div class="form-check">
-                                <input class="form-check-input @error('visible') is-invalid @enderror" type="checkbox"
-                                    value="1" id="visible" name="visible" @checked(old('visible'))>
+                        <div class="mb-4 py-4 border-bottom border-2">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input @error('visible') is-invalid @enderror" role="switch"
+                                    type="checkbox" value="1" id="visible" name="visible"
+                                    @checked(old('visible'))>
                                 <label class="form-check-label" for="visible">
-                                    Visibile
+                                    Visible
                                 </label>
                             </div>
                             @error('visible')
@@ -213,8 +225,10 @@
                                 </div>
                             @enderror
                         </div>
+                        <div class="d-flex justify-content-end">
 
-                        <button class="btn btn-dark" type="submit" class="my-5">Aggiungi</button>
+                            <button class="ms-auto btn btn-danger" type="submit" class="my-5">Add</button>
+                        </div>
                     </form>
                 </div>
             </div>
