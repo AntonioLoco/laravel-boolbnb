@@ -165,8 +165,6 @@ class ApartmentController extends Controller
             $response = Http::withOptions(['verify' => false])->get($urlTomTom);
             $data = json_decode($response->body(), true);
 
-            dd($data);
-
             if ($data["summary"]["totalResults"] == 1) {
                 //Setto latitudie e longitudine
                 $form_data["latitude"] = $data["results"][0]["position"]["lat"];
@@ -188,8 +186,6 @@ class ApartmentController extends Controller
             'house_number' => $form_data['house_number'],
             'postal_code' => $form_data['postal_code']
         ]);
-
-        // $apartment->address()->update($newAddress);
 
         //Se riceviamo i servizi
         if ($request->has('services')) {
