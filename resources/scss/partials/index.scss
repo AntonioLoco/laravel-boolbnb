@@ -1,0 +1,30 @@
+.index__img {
+    height: 300px;
+}
+
+#index {
+    height: calc(100vh - var(--header-height));
+    background-image: url(/storage/app/public/icons_svg/index.svg);
+    object-fit: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+
+    .col {
+        height: auto !important;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+
+        td {
+            height: 4rem;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: var(--bgGrey);
+        }
+    }
+}

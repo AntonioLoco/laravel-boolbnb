@@ -1,18 +1,20 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container py-5 text-center">
+    <section id="index" class="container text-center">
         @if (session('message'))
             <div class="alert alert-success my-3">
                 {{ session('message') }}
             </div>
         @endif
 
-        <h1>Your apartments</h1>
+        <div class="index__title mt-2">
+            <h1>Your Apartments</h1>
+        </div>
 
-        <div class="row justify-content-center mt-5">
-            <div class="col-9">
-                <table class="table">
+        <div class="row mt-5 d-flex justify-content-center">
+            <div class="col col-md-8">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">Visible</th>
@@ -26,7 +28,12 @@
                     <tbody>
                         @foreach ($apartments as $apartment)
                             <tr>
-                                <th>{{ $apartment->visible ? 'Si' : 'No' }}</th>
+                                <td>
+                                    <input type="hidden" name="visible" value="{{ $apartment->visible }}">
+                                    <input type="checkbox" name="visible_dummy" {{ $apartment->visible ? 'checked' : '' }}
+                                        disabled>
+
+                                </td>
                                 <td>{{ $apartment->title }}</td>
                                 <td>{{ $apartment->category->name }}</td>
                                 <td>
@@ -46,21 +53,19 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <ul class="d-flex m-0">
+                                    <ul class="d-flex align-items-center justify-content-center p-0 m-0">
                                         <li>
                                             <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.apartments.edit', $apartment->slug) }}" class="btn">
+                                            <a href="{{ route('admin.apartments.edit', $apartment->slug) }}"
+                                                class="btn">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            {{-- btn con classe delete-btn 
-                                                 data-apartment-title="{{ $apartment->title }}"
-                                        --}}
                                             <form action="{{ route('admin.apartments.destroy', $apartment->slug) }}"
                                                 method="POST">
                                                 @method('DELETE')
@@ -79,8 +84,7 @@
                 </table>
             </div>
         </div>
-
-    </div>
+    </section>
     {{-- Delete Modal --}}
     @include('partials.delete-modal')
     {{-- / Delete Modal --}}

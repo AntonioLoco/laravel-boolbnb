@@ -21,10 +21,6 @@
                     @endif
                 </div>
             </div>
-
-        </div>
-        <div class="home__image position-absolute bottom-0 end-0 p-2">
-            <img id="dashboard__img" src="{{ asset('storage/icons_svg/dashboard.svg') }}" alt="dashboard-image">
         </div>
     </section>
 @endsection
