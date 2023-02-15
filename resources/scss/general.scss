@@ -47,6 +47,12 @@ img {
     height: auto;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .button {
     display: inline-block;
     background-color: var(--title-color);
@@ -54,11 +60,6 @@ img {
     padding: 1.25rem 2rem;
     border-radius: 1rem;
     font-weight: var(--font-medium);
-}
-
-.button--flex {
-    display: inline-flex;
-    align-items: center;
 }
 
 .sidebar {
