@@ -29,3 +29,30 @@
         background-color: var(--primaryMain);
     }
 }
+
+@media screen and (max-width: 992px) {
+    .home__image {
+        #dashboard__img {
+            height: 300px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .home__image {
+        #dashboard__img {
+            height: 250px;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .home__image {
+        #dashboard__img {
+            height: 150px;
+        }
+    }
+}
+
+/* FOR SMALL DEVICES */
+@media screen and (max-width: 350px) {}
