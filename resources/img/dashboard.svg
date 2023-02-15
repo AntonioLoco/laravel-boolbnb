@@ -1,30 +1,4 @@
-@extends('layouts.admin')
-
-@section('content')
-    <section class="home__section">
-        <div class="home__container container-fluid">
-            <div class="home__content text-center">
-                <p>Hi {{ $user->name }},</p>
-                <h1 class="home__title">
-                    Welcome to your Dashboard!
-                </h1>
-                <hr>
-                <div class="home__subtitle">
-                    @if ($user->apartments->count() >= 1)
-                        <p class="mb-5">Total Apartment: {{ $user->apartments->count() }}</p>
-                        <p>Here you can see and change all your appartments.</p>
-                        <a href="{{ route('admin.apartments.index') }}" class="btn btn-outline-secondary">Show all</a>
-                    @else
-                        <p class="mt-4">It's easy to get started on Boolbnb</p>
-                        <a href="{{ route('admin.apartments.create') }}" class="btn btn-outline-secondary mt-4">Create new
-                            apartment</a>
-                    @endif
-                </div>
-            </div>
-
-        </div>
-        <div class="home__image position-absolute bottom-0 end-0 p-2">
-            <svg width="599" height="358" viewBox="0 0 599 358" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="599" height="358" viewBox="0 0 599 358" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_60_11952)">
                     <path
                         d="M458.609 353.913C450.94 347.436 446.282 337.204 447.503 327.243C448.725 317.282 456.291 308.124 466.106 306.009C475.92 303.894 487.108 309.749 490.089 319.332C491.729 300.856 493.62 281.607 503.447 265.873C512.345 251.626 527.757 241.432 544.461 239.609C561.164 237.785 578.75 244.673 589.167 257.851C599.584 271.028 602.135 290.186 594.839 305.315C589.464 316.46 579.562 324.755 569.187 331.503C535.663 353.124 495.454 361.916 455.96 356.262L458.609 353.913Z"
@@ -93,6 +67,3 @@
                     </clipPath>
                 </defs>
             </svg>
-        </div>
-    </section>
-@endsection

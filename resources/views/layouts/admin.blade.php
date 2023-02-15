@@ -101,34 +101,42 @@
         <div class="container-fluid">
             <div class="row">
                 {{-- Sidebar --}}
-                <div class="sidebar col-2 col-md-3 bg-light h-100">
-                    <div class="container py-5 text-center">
+                <div class="sidebar col-2 col-md-3">
+                    <div class="sidebar__container container">
                         <ul>
                             <li>
                                 <a href="{{ route('admin.dashboard') }}"
-                                    class="d-flex justify-content-center align-items-center">
-                                    <i class="fa-solid fa-house-user"></i>
-                                    <span class="d-none d-md-block ps-4">
-                                        Dashboard
-                                    </span>
+                                    class="sidebar__link {{ Route::currentRouteName() === 'admin.dashboard' ? 'cl-primary' : '' }}">
+                                    <i class="fa-solid fa-house-user icon"></i>
+                                    Dashboard
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.apartments.index') }}"
-                                    class="d-flex justify-content-center align-items-center">
-                                    <i class="fa-solid fa-list"></i>
-                                    <span class="d-none d-md-block ps-4">
-                                        Apartments
-                                    </span>
+                                    class="sidebar__link {{ Route::currentRouteName() === 'admin.apartments.index' ? 'cl-primary' : '' }} {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }}">
+                                    <i class="fa-solid fa-list icon"></i>
+                                    Apartments
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.apartments.create') }}"
-                                    class="d-flex justify-content-center align-items-center">
-                                    <i class="fa-solid fa-plus"></i>
-                                    <span class="d-none d-md-block ps-4">
-                                        Create Apartment
-                                    </span>
+                                    class="sidebar__link {{ Route::currentRouteName() === 'admin.apartments.create' ? 'cl-primary' : '' }}">
+                                    <i class="fa-solid fa-plus icon"></i>
+                                    Create new apartment
+                                </a>
+                            </li>
+                            <li>
+                                <a href=""
+                                    class="sidebar__link {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }}"">
+                                    <i class="fa-solid fa-chart-simple icon"></i>
+                                    Report
+                                </a>
+                            </li>
+                            <li>
+                                <a href=""
+                                    class="sidebar__link {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }}"">
+                                    <i class="fa-solid fa-inbox icon"></i>
+                                    Inbox
                                 </a>
                             </li>
                         </ul>

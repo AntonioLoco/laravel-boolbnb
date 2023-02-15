@@ -1,0 +1,31 @@
+.home__section {
+    padding: 1rem;
+}
+
+.home__container {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home__title {
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-semi-bold);
+    margin-bottom: var(--mb-0-25);
+}
+
+.home__subtitle {
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-normal);
+    margin-bottom: var(--mb-1);
+    border-color: var(--bgLightGrey);
+
+    a {
+        color: var(--socials)
+    }
+
+    a:hover {
+        background-color: var(--primaryMain);
+    }
+}

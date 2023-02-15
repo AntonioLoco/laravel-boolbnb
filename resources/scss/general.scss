@@ -3,23 +3,98 @@
 @import '~fontsource/poppins';
 @import './layout.scss';
 @import './apartments/show.scss';
+@import './partials/dashboard.scss';
 @import "./partials/variables";
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--body-font);
+    color: var(--text-color);
 }
 
-ul{
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+textarea {
+    font-size: var(--normal-font-size);
+}
+
+main {
+    position: relative;
+    height: calc(100vh - var(--header-height));
+}
+
+ul {
     list-style: none;
-    padding: 0;
 }
 
-a{
+a {
     text-decoration: none;
     color: inherit;
 }
 
-img{
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+img {
     max-width: 100%;
-    display: block;
+    height: auto;
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--title-color);
+    color: var(--container-color);
+    padding: 1.25rem 2rem;
+    border-radius: 1rem;
+    font-weight: var(--font-medium);
+}
+
+.button--flex {
+    display: inline-flex;
+    align-items: center;
+}
+
+.sidebar {
+    padding: 2rem;
+    background-color: var(--bgGrey);
+
+    ul {
+        padding: 0;
+    }
+
+    a {
+        margin-bottom: var(--mb-3);
+    }
+}
+
+.sidebar__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .cl-primary {
+        color: var(--primaryMain);
+    }
+}
+
+.sidebar__link {
+    font-size: var(--normal-font-size);
+    display: flex;
+    align-items: center;
+
+    .icon {
+        font-size: 1.5rem;
+        margin-right: .5rem;
+    }
+}
+
+.sidebar__link:hover {
+    color: var(--primaryMain);
 }
