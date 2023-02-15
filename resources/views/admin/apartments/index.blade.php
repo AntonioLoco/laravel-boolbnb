@@ -39,8 +39,11 @@
                                     @endforelse
                                 </td>
                                 <td>
-                                    <i class="fa-solid fa-eye"></i>
-                                    {{ $apartment->messages->count() }}
+                                    <a href="{{ route('admin.apartment.message', $apartment->slug) }}"
+                                        class="btn btn-outline">
+                                        <i class="fa-solid fa-eye"></i>
+                                        {{ $apartment->messages->count() }}
+                                    </a>
                                 </td>
                                 <td>
                                     <ul class="d-flex m-0">
