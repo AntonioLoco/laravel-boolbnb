@@ -1,12 +1,8 @@
-.index__img {
-    height: 300px;
-}
-
 #index {
     height: calc(100vh - var(--header-height));
     background-image: url(/storage/app/public/icons_svg/index.svg);
     object-fit: cover;
-    background-position: center bottom;
+    background-position: bottom;
     background-repeat: no-repeat;
 
     .col {
@@ -15,6 +11,7 @@
 
     .table {
         width: 100%;
+        background-color: white;
         border-collapse: collapse;
 
         td {
