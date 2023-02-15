@@ -13,6 +13,6 @@ class MessageController extends Controller
     {
         $apartment = Apartment::with(["messages"])->where("slug", $slug)->first();
         $messages = $apartment->messages;
-        return view("admin.message.index", compact("messages"));
+        return view("admin.message.index", compact("messages", "apartment"));
     }
 }

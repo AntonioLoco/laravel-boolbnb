@@ -8,7 +8,7 @@
             </div>
         @endif
 
-        <h1>Ecco i tuoi appartamenti</h1>
+        <h1>Your apartment</h1>
 
         <div class="row justify-content-center mt-5">
             <div class="col-9">
