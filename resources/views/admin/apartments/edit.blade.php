@@ -233,8 +233,7 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="d-flex justify-content-end">
-
+                        <div class="d-flex justify-content-end mb-5">
                             <button class="ms-auto btn btn-danger" type="submit" class="my-5">Update</button>
                         </div>
                     </form>
