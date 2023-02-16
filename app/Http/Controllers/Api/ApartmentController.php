@@ -52,7 +52,7 @@ class ApartmentController extends Controller
                 $services = $request->services;
                 $apartments = $apartments->whereHas('services', function ($query) use ($services) {
                     $query->whereIn('id', $services);
-                });
+                }, "=", count($services))->with("services");
             }
 
             $apartments = $apartments->orderBy('distance')->get();
