@@ -14,7 +14,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($messages as $message)
+                        @foreach ($messages->reverse() as $message)
                             <tr>
                                 <td>{{ $message->fullname }}</td>
                                 <td>{{ $message->email }}</td>

@@ -112,7 +112,12 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view("admin.apartments.show", compact("apartment"));
+        if (Auth::id() == $apartment->user_id) {
+            return view("admin.apartments.show", compact("apartment"));
+        } else {
+            $message = "Non sei autorizzato a visualizzare questo appartamento";
+            return view("admin.notAllowed", compact("message"));
+        }
     }
 
     /**
@@ -123,9 +128,14 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        $categories = Category::all();
-        $services = Service::all();
-        return view("admin.apartments.edit", compact("apartment", "categories", "services"));
+        if (Auth::id() == $apartment->user_id) {
+            $categories = Category::all();
+            $services = Service::all();
+            return view("admin.apartments.edit", compact("apartment", "categories", "services"));
+        } else {
+            $message = "Non sei autorizzato a modificare questo appartmento";
+            return view("admin.notAllowed", compact("message"));
+        }
     }
 
     /**
