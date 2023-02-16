@@ -132,13 +132,6 @@
                                     <span class="d-none d-md-block">Report</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href=""
-                                    class="sidebar__link {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }}">
-                                    <i class="fa-solid fa-inbox icon"></i>
-                                    <span class="d-none d-md-block">Inbox</span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
