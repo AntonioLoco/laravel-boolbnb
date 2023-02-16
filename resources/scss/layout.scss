@@ -18,9 +18,15 @@
 
     .row {
         .sidebar {
+            
+
             li {
                 margin-bottom: 1em;
             }
         }
+    }
+
+    main {
+        height: calc(100vh - 80px);
     }
 }

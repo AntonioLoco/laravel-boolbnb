@@ -18,7 +18,7 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm py-3">
                 <div class="container">
-                    <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                    <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.dashboard') }}">
                         <div class="logo_laravel">
                             <svg class="d-none d-lg-block" width="240" height="27" viewBox="0 0 240 27"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +99,7 @@
         </header>
 
         <div class="container-fluid">
-            <div class="row">
+            <div class="row flex-nowrap">
                 {{-- Sidebar --}}
                 <div class="sidebar col-2 col-md-3 d-md-block">
                     <div class="sidebar__container container">
@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 {{-- Content --}}
-                <main class="content col-10 col-md-9 h-100 overflow-auto">
+                <main class="content col-10 col-md-9 overflow-auto">
                     @yield('content')
                 </main>
             </div>
