@@ -4,7 +4,7 @@
 @import './layout.scss';
 @import './apartments/show.scss';
 @import './partials/dashboard.scss';
-@import './partials/index.scss';
+@import './apartments/index.scss';
 @import "./partials/variables";
 
 body {
@@ -25,6 +25,7 @@ textarea {
 
 main {
     position: relative;
+    padding: 0;
     height: calc(100vh - var(--header-height));
 }
 
@@ -64,7 +65,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .sidebar {
-    padding: 2rem;
+    padding-top: 2rem;
     background-color: var(--bgGrey);
     height: calc(100vh - 80px);
 
@@ -74,6 +75,22 @@ input[type=number]::-webkit-outer-spin-button {
 
     a {
         margin-bottom: var(--mb-3);
+
+        i {
+            width: 1rem;
+            height: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        span {
+            margin-left: 1rem;
+        }
+    }
+
+    li {
+        margin-bottom: 1em;
     }
 }
 

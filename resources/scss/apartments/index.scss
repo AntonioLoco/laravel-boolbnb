@@ -1,0 +1,48 @@
+#index {
+    height: calc(100vh - var(--header-height));
+    background-image: url("/storage/app/public/icons_svg/index.svg");
+    object-fit: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .index__title {
+        p {
+            color: var(--darkerGrey);
+        }
+    }
+
+    .table {
+        width: 80%;
+        background-color: white;
+        border-collapse: collapse;
+        margin-top: 4rem;
+
+        td {
+            height: 4rem;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: var(--bgGrey);
+        }
+    }
+
+    .table-sm {
+        display: none;
+    }
+
+    @media screen and (max-width: 425px) {
+        .table-md {
+            display: none;
+        }
+
+        .table-sm {
+            display: block;
+        }
+    }
+}
