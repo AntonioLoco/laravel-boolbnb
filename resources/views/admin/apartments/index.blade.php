@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <section id="index" class="container text-center p-2">
+    <section id="index" class="container text-center">
         @if (session('message'))
             <div class="alert alert-success my-3">
                 {{ session('message') }}
@@ -20,7 +20,7 @@
                     <th scope="col">Apartment</th>
                     <th scope="col">Type</th>
                     <th scope="col">Sponsor</th>
-                    <th scope="col">Messages</th>
+                    <th scope="col col-msg">Messages</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>

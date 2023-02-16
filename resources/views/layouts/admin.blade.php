@@ -85,28 +85,28 @@
                                 <a href="{{ route('admin.dashboard') }}"
                                     class="sidebar__link {{ Route::currentRouteName() === 'admin.dashboard' ? 'cl-primary' : '' }}">
                                     <i class="fa-solid fa-house-user icon"></i>
-                                    <span class="d-none d-md-block">Dashboard</span>
+                                    <span class="d-none d-lg-block">Dashboard</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.apartments.index') }}"
                                     class="sidebar__link {{ Route::currentRouteName() === 'admin.apartments.index' ? 'cl-primary' : '' }} {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }}">
                                     <i class="fa-solid fa-list icon"></i>
-                                    <span class="d-none d-md-block">Apartments</span>
+                                    <span class="d-none d-lg-block">Apartments</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.apartments.create') }}"
                                     class="sidebar__link {{ Route::currentRouteName() === 'admin.apartments.create' ? 'cl-primary' : '' }}">
                                     <i class="fa-solid fa-plus icon"></i>
-                                    <span class="d-none d-md-block">Create new apartment</span>
+                                    <span class="d-none d-lg-block">Create new apartment</span>
                                 </a>
                             </li>
                             <li>
                                 <a href=""
                                     class="sidebar__link {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }}">
                                     <i class="fa-solid fa-chart-simple icon"></i>
-                                    <span class="d-none d-md-block">Report</span>
+                                    <span class="d-none d-lg-block">Report</span>
                                 </a>
                             </li>
                         </ul>
