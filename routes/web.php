@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\SponsorshipController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,18 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('apartments', ApartmentController::class)->parameters(["apartments" => "apartment:slug"]);
         Route::get("/{apartment}/message", [MessageController::class, "index"])->name('apartment.message');
-        Route::get('/{apartment}/sponsorship', [SponsorshipController::class, 'index'])->name('apartment.sponsorship');
+
+
+        Route::get('/{apartment}/sponsorship', [SponsorshipController::class, 'create'])->name('apartment.sponsorship');
+        Route::post("/apartment/checkout", [SponsorshipController::class, "checkout"])->name("apartment.checkout");
+
+
+        Route::get("apartment/payment/success", function () {
+            return view("admin.apartments.sponsorship.success");
+        })->name("payment.success");
+        Route::get("apartment/payment/not-success", function () {
+            return view("admin.apartment.sponsorship.notSuccess");
+        })->name("payment.notSuccess");
     });
 
 

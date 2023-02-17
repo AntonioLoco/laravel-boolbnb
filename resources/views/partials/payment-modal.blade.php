@@ -27,13 +27,13 @@
                 <div class="modal-body d-flex flex-wrap">
 
                     <div class="form-group w-75 mb-3 pe-3">
-                        <label class="form-label" for=""> Name on card</label>
-                        <input class="form-control" type="text" placeholder="Full name" id="" name="">
+                        <label class="form-label" for="num_card"> Name on card</label>
+                        <input class="form-control" type="text" placeholder="Full name" id="num_card" name="">
                     </div>
 
                     <div class="form-group w-25 mb-3">
-                        <label class="form-label" for=""> Expiry</label>
-                        <input class="form-control" type="text" placeholder="mm/yyyy" id="" name="">
+                        <label class="form-label" for="expiry"> Expiry</label>
+                        <input class="form-control" type="text" placeholder="mm/yyyy" id="expiry" name="">
                     </div>
 
 
