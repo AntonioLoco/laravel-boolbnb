@@ -39,14 +39,6 @@ Route::middleware(['auth', 'verified'])
 
         Route::get('/{apartment}/sponsorship', [SponsorshipController::class, 'create'])->name('apartment.sponsorship');
         Route::post("/apartment/checkout", [SponsorshipController::class, "checkout"])->name("apartment.checkout");
-
-
-        Route::get("apartment/payment/success", function () {
-            return view("admin.apartments.sponsorship.success");
-        })->name("payment.success");
-        Route::get("apartment/payment/failed", function () {
-            return view("admin.apartment.sponsorship.failed");
-        })->name("payment.failed");
     });
 
 

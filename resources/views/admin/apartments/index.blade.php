@@ -35,13 +35,28 @@
                         <td>{{ $apartment->title }}</td>
                         <td>{{ $apartment->category->name }}</td>
                         <td>
+                            @php
+                                $sponsorNum = 0;
+                            @endphp
                             @forelse ($apartment->sponsorships as $sponsor)
                                 @if ($sponsor->pivot->is_active)
+                                    @php
+                                        $sponsorNum = $sponsorNum + 1;
+                                    @endphp
                                     {{ $sponsor->name }}
                                 @endif
                             @empty
-                                {{ 'Nessuno' }}
+                                {{ 'Never sponsor' }}
                             @endforelse
+
+                            @if ($sponsorNum == 0)
+                                <a href="{{ route('admin.apartment.sponsorship', $apartment->slug) }}"
+                                    class="btn btn-outline">
+                                    Aggiungi
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
+                            @endif
+
                         </td>
                         <td>
                             <a href="{{ route('admin.apartment.message', $apartment->slug) }}" class="btn btn-outline">

@@ -6,14 +6,16 @@
             <div class="col text-center">
                 <h2 class="title-payment fw-bolder">Well done!</h2>
                 <h3 class="fw-bold">Your apartment was updated with the new sponsorship</h3>
+                <p>ID of transiction: {{ $transaction }}</p>
+                <p>Your sponsorship expires on {{ $end_date }}</p>
+
 
                 <a href="{{ route('admin.dashboard') }}" class="btn ms-btn-payment mt-5">
                     Back to dashboard
                 </a>
             </div>
             <div class="col text-center">
-                <img src="{{ asset('/storage/app/public/payment_images/back-payment-yes.svg') }}" alt="sent-message"
-                    class="w-50 pt-5">
+                <img src="{{ asset('storage/payment_images/back-payment-yes.svg') }}" alt="sent-message" class="w-50 pt-5">
             </div>
         </div>
     </div>

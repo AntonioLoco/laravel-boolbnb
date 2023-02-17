@@ -15,18 +15,30 @@ class SponsorshipController extends Controller
     public function create($slug)
     {
         $apartment = Apartment::where("slug", $slug)->first();
-        $sponsorships = Sponsorship::all();
 
-        $gateway = new Gateway([
-            'environment' => getenv('BT_ENVIRONMENT'),
-            'merchantId' => getenv('BT_MERCHANT_ID'),
-            'publicKey' => getenv('BT_PUBLIC_KEY'),
-            'privateKey' => getenv('BT_PRIVATE_KEY')
-        ]);
+        $sponsorNum = 0;
+        foreach ($apartment->sponsorships as $sponsor) {
+            if ($sponsor->pivot->is_active) {
+                $sponsorNum++;
+            }
+        }
 
-        $token = $gateway->clientToken()->generate();
+        if ($sponsorNum === 0) {
+            $sponsorships = Sponsorship::all();
 
-        return view("admin.apartments.sponsorship.create", compact("apartment", "sponsorships", "token"));
+            $gateway = new Gateway([
+                'environment' => getenv('BT_ENVIRONMENT'),
+                'merchantId' => getenv('BT_MERCHANT_ID'),
+                'publicKey' => getenv('BT_PUBLIC_KEY'),
+                'privateKey' => getenv('BT_PRIVATE_KEY')
+            ]);
+
+            $token = $gateway->clientToken()->generate();
+
+            return view("admin.apartments.sponsorship.create", compact("apartment", "sponsorships", "token"));
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function checkout(Request $request)
@@ -76,14 +88,14 @@ class SponsorshipController extends Controller
             $jobs = new DeleteSponsorJob($apartment, $request->sponsorship_id);
             dispatch($jobs->onConnection('database')->delay(now()->addSeconds($sponsorship->hours)));
 
-            return redirect()->route("admin.payment.success", compact("transaction", "end_date"));
+            return view("admin.apartments.sponsorship.success", compact("transaction", "end_date"));
         } else {
             // $errorString = "";
 
             // foreach ($result->errors->deepAll() as $error) {
             //     $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
             // }
-            return redirect()->route("admin.payment.failed", compact("apartment"));
+            return view("admin.apartments.sponsorship.failed", compact("apartment"));
         }
     }
 }

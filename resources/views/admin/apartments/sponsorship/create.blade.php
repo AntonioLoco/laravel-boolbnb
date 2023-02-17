@@ -38,7 +38,8 @@
 
                 <div class="mt-5 text-end">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-pay px-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-pay px-5" data-bs-toggle="modal" data-bs-target="#myModal"
+                        id="btn-pay">
                         Pay
                     </button>
                 </div>
@@ -50,7 +51,7 @@
 
 
         <!-- Modal -->
-        <div class="modal fade mt-5" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade mt-5" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -124,12 +125,31 @@
     <script>
         var form = document.querySelector('#payment-form');
         var submit = document.querySelector('input[type="submit"]');
+        var myModal = document.getElementById('myModal');
+        const btn = document.querySelector("#btn-pay");
+        const radioButtons = document.getElementsByName('sponsorships_value');
 
-        console.log(form);
-        // form.addEventListener("submit", event => {
-        //     event.preventDefault();
-        //     console.log("ti ho bloccato");
-        // })
+
+
+        // btn.addEventListener("click", function() {
+        //     document.querySelector(".modal-backdrop").classList.remove("d-none");
+        //     myModal.classList.remove("d-none");
+        //     let isChecked = false;
+        //     for (let i = 0; i < radioButtons.length; i++) {
+        //         if (radioButtons[i].checked) {
+        //             isChecked = true;
+        //             break;
+        //         }
+        //     }
+        //     if (isChecked === false) {
+        //         myModal.classList.add("d-none");
+        //         document.querySelector(".modal-backdrop").classList.add("d-none");
+        //     }
+        // });
+
+        // myModal.show();
+
+
         braintree.client.create({
             authorization: '{{ $token }}'
         }, function(clientErr, clientInstance) {
