@@ -26,7 +26,8 @@
                     <tbody>
                         @foreach ($sponsorships as $sponsor)
                             <tr>
-                                <td><input type="radio" name="sponsorship_id" value="{{ $sponsor->id }}" id="radio-btn">
+                                <td><input type="radio" value="{{ $sponsor->id }}" id="radio-btn"
+                                        name="sponsorships_value">
                                 </td>
                                 <td>{{ $sponsor->name }}</td>
                                 <td>{{ $sponsor->price }} x {{ $sponsor->hours }}</td>
@@ -36,11 +37,163 @@
                 </table>
 
                 <div class="mt-5 text-end">
-                    <a class="btn btn-pay px-5">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-pay px-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Pay
-                    </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        {{-- Modal Payment --}}
+
+
+        <!-- Modal -->
+        <div class="modal fade mt-5" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    {{-- Modal-header --}}
+                    <div class="modal-header d-flex flex-column">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                        <div class="text-center">
+                            <i class="fa-regular fa-credit-card fa-xl"></i>
+                            <h1 class="modal-title fs-5 mt-3 id="staticBackdropLabel">Update payment method</h1>
+                            <span class="fst-italic"> Insert your card details </span>
+                        </div>
+                    </div>
+                    {{-- / Modal-header --}}
+
+                    {{-- Modal-body --}}
+                    <form action="{{ route('admin.apartment.checkout') }}" method="POST" id="payment-form">
+                        @csrf
+                        <div class="modal-body d-flex flex-wrap">
+                            <div class="form-group w-75 mb-3 pe-3">
+                                <label class="form-label" for="name"> Name on card</label>
+                                <input class="form-control" type="text" placeholder="Full name" id="name"
+                                    name="name_of_card">
+                            </div>
+
+                            <div class="form-group w-25 mb-3">
+                                <label class="form-label" for="expiry"> Expiry</label>
+
+                                <div class="form-group" id="expiration-date">
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group w-75 mb-3 pe-3">
+                                <label class="form-label" for="card-number">Card number</label>
+                                <div class="form-group" id="card-number">
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group w-25 mb-3">
+                                <label class="form-label" for="">CVV</label>
+                                <div class="form-group" id="cvv">
+
+                                </div>
+                            </div>
+
+                            <input id="sponsorship_id" name="sponsorship_id" type="hidden" />
+                            <input id="apartment_id" name="apartment_id" type="hidden">
+                            <input id="nonce" name="payment_method_nonce" type="hidden" />
+                        </div>
+                        {{-- /Modal-body --}}
+
+                        {{-- Modal-footer --}}
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="reset" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
+
+                            <button type="submit" class="btn btn-danger">Confirm Payment</button>
+                        </div>
+                        {{-- /Modal-footer --}}
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://js.braintreegateway.com/web/3.38.1/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.38.1/js/hosted-fields.min.js"></script>
+    <script>
+        var form = document.querySelector('#payment-form');
+        var submit = document.querySelector('input[type="submit"]');
+
+        console.log(form);
+        // form.addEventListener("submit", event => {
+        //     event.preventDefault();
+        //     console.log("ti ho bloccato");
+        // })
+        braintree.client.create({
+            authorization: '{{ $token }}'
+        }, function(clientErr, clientInstance) {
+            if (clientErr) {
+                console.error(clientErr);
+                return;
+            }
+            // This example shows Hosted Fields, but you can also use this
+            // client instance to create additional components here, such as
+            // PayPal or Data Collector.
+            braintree.hostedFields.create({
+                client: clientInstance,
+                styles: {
+                    'input': {
+                        'font-size': '14px'
+                    },
+                    'input.invalid': {
+                        'color': 'red'
+                    },
+                    'input.valid': {
+                        'color': 'green'
+                    }
+                },
+                fields: {
+                    number: {
+                        selector: '#card-number',
+                        placeholder: '4111 1111 1111 1111'
+                    },
+                    cvv: {
+                        selector: '#cvv',
+                        placeholder: '123'
+                    },
+                    expirationDate: {
+                        selector: '#expiration-date',
+                        placeholder: '10/2019'
+                    }
+                }
+            }, function(hostedFieldsErr, hostedFieldsInstance) {
+                if (hostedFieldsErr) {
+                    console.error(hostedFieldsErr);
+                    return;
+                }
+                // submit.removeAttribute('disabled');
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    hostedFieldsInstance.tokenize(function(tokenizeErr, payload) {
+                        if (tokenizeErr) {
+                            console.error(tokenizeErr);
+                            return;
+                        }
+                        // If this was a real integration, this is where you would
+                        // send the nonce to your server.
+                        // console.log('Got a nonce: ' + payload.nonce);
+
+                        document.querySelector("#sponsorship_id").value = document
+                            .querySelector("input[name='sponsorships_value']:checked").value
+                        document.querySelector("#apartment_id").value =
+                            "{{ $apartment->id }}";
+                        console.log("qui arrivo");
+                        document.querySelector('#nonce').value = payload.nonce;
+                        form.submit();
+                    });
+                }, false);
+            });
+        });
+    </script>
 @endsection

@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('apartment_sponsorship', function (Blueprint $table) {
+            $table->id("pivot_id");
+
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')->references('id')->on('apartments')->cascadeOnDelete();
 
             $table->unsignedBigInteger('sponsorship_id');
             $table->foreign('sponsorship_id')->references('id')->on('sponsorships')->cascadeOnDelete();
 
-            $table->primary(['apartment_id', 'sponsorship_id']);
-
-            $table->date('end_date');
+            $table->dateTime('end_date');
             $table->boolean('is_active')->default(1);
 
             $table->timestamps();
