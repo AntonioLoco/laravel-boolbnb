@@ -1,0 +1,35 @@
+.title-payment {
+    color: var(--primaryMain);
+}
+
+.ms-btn-payment,
+.ms-btn-payment-failed {
+    color: white;
+    border-radius: 30px;
+    padding: 1rem;
+}
+
+.ms-btn-payment:hover,
+.ms-btn-payment-failed:hover {
+    cursor: pointer;
+}
+
+.ms-btn-payment:hover {
+    border-color: var(--darkBlue);
+    color: var(--darkBlue);
+}
+
+.ms-btn-payment-failed:hover {
+    border: none;
+    background-color: var(--darkBlue);
+    color: white;
+}
+
+.ms-btn-payment {
+    background-color: var(--darkBlue);
+}
+
+.ms-btn-payment-failed {
+    border-color: var(--darkBlue);
+    color: var(--darkBlue);
+}
