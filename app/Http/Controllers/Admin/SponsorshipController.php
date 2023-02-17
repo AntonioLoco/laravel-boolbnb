@@ -27,9 +27,9 @@ class SponsorshipController extends Controller
         return view("admin.apartments.sponsorship.create", compact("apartment", "sponsorships", "token"));
     }
 
-    public function checkout(Request $request, $slug)
+    public function checkout(Request $request)
     {
-        dd($apartment);
+
         $gateway = new Gateway([
             'environment' => getenv('BT_ENVIRONMENT'),
             'merchantId' => getenv('BT_MERCHANT_ID'),
@@ -53,20 +53,18 @@ class SponsorshipController extends Controller
             ]
         ]);
 
-        if ($result->success) {
-            $transaction = $result->transaction;
-            // return back()->with("success_message", "Tansaction successful with ID: $transaction->id ");
-            return redirect()->route("payment.success")->with("message", "Transaction successful with ID: " . $transaction->id);
-        } else {
-            $apartment = Apartment::where("slug", $slug)->first();
-            $errorString = "";
+        // if ($result->success) {
+        //     $transaction = $result->transaction;
+        //     // return back()->with("success_message", "Tansaction successful with ID: $transaction->id ");
+        //     return redirect()->route("payment.success")->with("message", "Transaction successful with ID: " . $transaction->id);
+        // } else {
+        //     $errorString = "";
 
-            foreach ($result->errors->deepAll() as $error) {
-                $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
-            }
+        //     foreach ($result->errors->deepAll() as $error) {
+        //         $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+        //     }
 
-            return redirect()->route("payment.failed", compact('apartment'));
-        }
+        //     return back()->withErrors('An error occurred with the message: ' . $result->message);
         // }
     }
 }

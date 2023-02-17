@@ -9,6 +9,22 @@
     padding: 1rem;
 }
 
+.ms-btn-payment:hover,
+.ms-btn-payment-failed:hover {
+    cursor: pointer;
+}
+
+.ms-btn-payment:hover {
+    border-color: var(--darkBlue);
+    color: var(--darkBlue);
+}
+
+.ms-btn-payment-failed:hover {
+    border: none;
+    background-color: var(--darkBlue);
+    color: white;
+}
+
 .ms-btn-payment {
     background-color: var(--darkBlue);
 }
