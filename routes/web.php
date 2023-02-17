@@ -44,9 +44,9 @@ Route::middleware(['auth', 'verified'])
         Route::get("apartment/payment/success", function () {
             return view("admin.apartments.sponsorship.success");
         })->name("payment.success");
-        Route::get("apartment/payment/not-success", function () {
-            return view("admin.apartment.sponsorship.notSuccess");
-        })->name("payment.notSuccess");
+        Route::get("apartment/payment/failed", function () {
+            return view("admin.apartments.sponsorship.failed");
+        })->name("payment.failed");
     });
 
 

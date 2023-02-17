@@ -4,13 +4,13 @@
     <div class="container-fluid d-flex justify-content-center p-5">
         <div class="row row-cols-1 row-cols-md-2 w-75">
             <div class="col text-center">
-                <h2>Error</h2>
-                <h3>Sorry, the card was invalid ...</h3>
+                <h2 class="title-payment fw-bolder">Error</h2>
+                <h3 class="fw-bold">Sorry, the card was invalid ...</h3>
 
-                <a href="{{ route('admin.sponsorship.create') }}" class="ms-btn-filter mt-3">
+                <a href="{{ route('admin.sponsorship', $apartment->slug) }}" class="btn ms-btn-payment mt-5 me-3">
                     Back to sponsor
                 </a>
-                <a href="{{ route('admin.dashboard') }}" class="ms-btn-filter mt-3">
+                <a href="{{ route('admin.dashboard') }}" class="btn ms-btn-payment-failed mt-5">
                     Contact us
                 </a>
             </div>
