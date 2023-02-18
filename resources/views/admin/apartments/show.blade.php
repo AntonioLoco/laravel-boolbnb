@@ -73,16 +73,31 @@
                         </li>
                         <li>
                             <h5 class="d-inline me-3">SPONSOR: </h5>
+                            @php
+                                $sponsorNum = 0;
+                            @endphp
                             @forelse ($apartment->sponsorships as $sponsor)
                                 @if ($sponsor->pivot->is_active)
-                                    {{ $sponsor->name }}
-                                @else
-                                    {{ 'Nessuno' }}
+                                    @php
+                                        $sponsorNum = $sponsorNum + 1;
+                                    @endphp
+                                    <strong>{{ $sponsor->name }}</strong> <br>
+                                    <h5 class="d-inline me-3">SCADENZA:</h5> {{ $sponsor->pivot->end_date }}
                                 @endif
                             @empty
-                                {{ 'Nessuno' }}
+                                {{ 'Never sponsor' }}
                             @endforelse
+
                         </li>
+                        @if ($sponsorNum == 0)
+                            <li>
+                                <a href="{{ route('admin.apartment.sponsorship', $apartment->slug) }}"
+                                    class="btn btn-danger mt-4">
+                                    Sponsorizza
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

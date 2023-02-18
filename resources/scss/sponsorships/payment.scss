@@ -33,3 +33,21 @@
     border-color: var(--darkBlue);
     color: var(--darkBlue);
 }
+
+#card-number,
+#cvv,
+#expiration-date {
+    background: white;
+    height: 38px;
+    border: 1px solid #CED4DA;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+}
+
+.braintree-hosted-fields-invalid {
+    box-shadow: 0 0 4px 1px var(--primaryMain);
+}
+
+.braintree-hosted-fields-valid {
+    box-shadow: 0 0 4px 1px green;
+}

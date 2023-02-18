@@ -26,3 +26,31 @@ deleteBtns.forEach((btn) => {
         modal.show();
     });
 });
+
+//Modal Payment
+const paymentModal = new bootstrap.Modal(document.getElementById('payment-modal'));
+const btnPay = document.getElementById("btn-pay");
+const radioSponsorshipButton = document.getElementsByName('sponsorships_value');
+
+btnPay.addEventListener("click", function() {
+    let isChecked = false;
+
+    for (let i = 0; i < radioSponsorshipButton.length; i++) {
+        if (radioSponsorshipButton[i].checked) {
+            isChecked = true;
+            break;
+        }
+    }
+    if (isChecked === true) {
+        paymentModal.show();
+    }
+});
+
+
+radioSponsorshipButton.forEach( radioBtn => {
+    radioBtn.addEventListener("click", function(){
+        if((btnPay.className).includes("disabled")){
+            btnPay.classList.remove("disabled");
+        }
+    })
+})

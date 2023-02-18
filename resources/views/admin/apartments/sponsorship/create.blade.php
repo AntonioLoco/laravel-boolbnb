@@ -15,6 +15,17 @@
 
         <div class="row justify-content-center mt-5 text-center">
             <div class="col-7">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="m-0">
+                            @foreach ($errors->all() as $error)
+                                <li>
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <table class="table table-bordered">
                     <thead>
                         <tr class="tr_bg">
@@ -38,10 +49,10 @@
 
                 <div class="mt-5 text-end">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-pay px-5" data-bs-toggle="modal" data-bs-target="#myModal"
-                        id="btn-pay">
+                    <button type="button" class="btn btn-pay px-5 disabled" id="btn-pay">
                         Pay
                     </button>
+                    {{-- data-bs-toggle="modal" data-bs-target="#myModal" --}}
                 </div>
             </div>
         </div>
@@ -51,7 +62,7 @@
 
 
         <!-- Modal -->
-        <div class="modal fade mt-5" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade mt-5" id="payment-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -68,41 +79,44 @@
                     {{-- / Modal-header --}}
 
                     {{-- Modal-body --}}
-                    <form action="{{ route('admin.apartment.checkout') }}" method="POST" id="payment-form">
+                    <form action="{{ route('admin.apartment.checkout') }}" method="POST" id="payment-form"
+                        autocomplete="off">
                         @csrf
-                        <div class="modal-body d-flex flex-wrap">
-                            <div class="form-group w-75 mb-3 pe-3">
-                                <label class="form-label" for="name"> Name on card</label>
-                                <input class="form-control" type="text" placeholder="Full name" id="name"
-                                    name="name_of_card">
-                            </div>
+                        <div class="modal-body">
+                            <div class=" mb-3">
+                                <label for="cc_number">Card number</label>
+                                <div class="form-group position-relative" id="card-number">
 
-                            <div class="form-group w-25 mb-3">
-                                <label class="form-label" for="expiry"> Expiry</label>
-
-                                <div class="form-group" id="expiration-date">
-
+                                    <span class="input-group-text position-absolute top-0 bottom-0 end-0"> <i
+                                            class="fa-brands fa-cc-mastercard"></i> </span>
                                 </div>
                             </div>
 
+                            <div class="row justify-content-between">
+                                <div class="col-7">
+                                    <label for="expiry"> Expiry</label>
 
-                            <div class="form-group w-75 mb-3 pe-3">
-                                <label class="form-label" for="card-number">Card number</label>
-                                <div class="form-group" id="card-number">
+                                    <div class="form-group position-relative" id="expiration-date">
 
+                                        <span class="input-group-text position-absolute top-0 bottom-0 end-0">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
+                                <div class="col-4">
+                                    <label for="cvv">CVV</label>
+                                    <div class="form-group position-relative" id="cvv">
 
-                            <div class="form-group w-25 mb-3">
-                                <label class="form-label" for="">CVV</label>
-                                <div class="form-group" id="cvv">
-
+                                        <span class="input-group-text position-absolute top-0 bottom-0 end-0">
+                                            <i class="fa-solid fa-lock"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
                             <input id="sponsorship_id" name="sponsorship_id" type="hidden" />
-                            <input id="apartment_id" name="apartment_id" type="hidden">
+                            <input id="apartment_id" name="apartment_id" type="hidden" />
                             <input id="nonce" name="payment_method_nonce" type="hidden" />
                         </div>
                         {{-- /Modal-body --}}
@@ -120,35 +134,15 @@
         </div>
     </div>
 
+
     <script src="https://js.braintreegateway.com/web/3.38.1/js/client.min.js"></script>
     <script src="https://js.braintreegateway.com/web/3.38.1/js/hosted-fields.min.js"></script>
     <script>
         var form = document.querySelector('#payment-form');
-        var submit = document.querySelector('input[type="submit"]');
-        var myModal = document.getElementById('myModal');
-        const btn = document.querySelector("#btn-pay");
-        const radioButtons = document.getElementsByName('sponsorships_value');
 
-
-
-        // btn.addEventListener("click", function() {
-        //     document.querySelector(".modal-backdrop").classList.remove("d-none");
-        //     myModal.classList.remove("d-none");
-        //     let isChecked = false;
-        //     for (let i = 0; i < radioButtons.length; i++) {
-        //         if (radioButtons[i].checked) {
-        //             isChecked = true;
-        //             break;
-        //         }
-        //     }
-        //     if (isChecked === false) {
-        //         myModal.classList.add("d-none");
-        //         document.querySelector(".modal-backdrop").classList.add("d-none");
-        //     }
-        // });
-
-        // myModal.show();
-
+        const cardNumber = document.querySelector("#card-number");
+        const expiryNumber = document.querySelector("#expiration-date");
+        const cvvNumber = document.querySelector("#cvv");
 
         braintree.client.create({
             authorization: '{{ $token }}'
@@ -170,7 +164,7 @@
                         'color': 'red'
                     },
                     'input.valid': {
-                        'color': 'green'
+                        'color': 'green',
                     }
                 },
                 fields: {
@@ -186,29 +180,58 @@
                         selector: '#expiration-date',
                         placeholder: '10/2019'
                     }
-                }
+                },
             }, function(hostedFieldsErr, hostedFieldsInstance) {
                 if (hostedFieldsErr) {
-                    console.error(hostedFieldsErr);
+                    console.log(hostedFieldsErr);
                     return;
                 }
                 // submit.removeAttribute('disabled');
                 form.addEventListener('submit', function(event) {
                     event.preventDefault();
+                    cardNumber.classList.remove("braintree-hosted-fields-invalid");
+                    expiryNumber.classList.remove(
+                        "braintree-hosted-fields-invalid");
+                    cvvNumber.classList.remove("braintree-hosted-fields-invalid");
+
                     hostedFieldsInstance.tokenize(function(tokenizeErr, payload) {
                         if (tokenizeErr) {
                             console.error(tokenizeErr);
+                            if (!tokenizeErr.details) {
+                                cardNumber.classList.add("braintree-hosted-fields-invalid");
+                                expiryNumber.classList.add(
+                                    "braintree-hosted-fields-invalid");
+                                cvvNumber.classList.add("braintree-hosted-fields-invalid");
+                            }
+
+                            if (tokenizeErr.details) {
+                                const invalidFields = tokenizeErr.details
+                                    .invalidFields;
+
+                                if (invalidFields.cvv) {
+                                    invalidFields.cvv.classList.add(
+                                        "braintree-hosted-fields-invalid")
+                                }
+
+                                if (invalidFields.expirationDate) {
+                                    invalidFields.expirationDate.classList.add(
+                                        "braintree-hosted-fields-invalid")
+                                }
+
+                                if (invalidFields.number) {
+                                    invalidFields.number.classList.add(
+                                        "braintree-hosted-fields-invalid")
+                                }
+                            }
+
+
                             return;
                         }
-                        // If this was a real integration, this is where you would
-                        // send the nonce to your server.
-                        // console.log('Got a nonce: ' + payload.nonce);
 
                         document.querySelector("#sponsorship_id").value = document
                             .querySelector("input[name='sponsorships_value']:checked").value
                         document.querySelector("#apartment_id").value =
                             "{{ $apartment->id }}";
-                        console.log("qui arrivo");
                         document.querySelector('#nonce').value = payload.nonce;
                         form.submit();
                     });

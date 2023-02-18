@@ -30,7 +30,8 @@ class SponsorshipController extends Controller
                 'environment' => getenv('BT_ENVIRONMENT'),
                 'merchantId' => getenv('BT_MERCHANT_ID'),
                 'publicKey' => getenv('BT_PUBLIC_KEY'),
-                'privateKey' => getenv('BT_PRIVATE_KEY')
+                'privateKey' => getenv('BT_PRIVATE_KEY'),
+                'caFile' => getenv('BRAINTREE_SSL_CERT_PATH')
             ]);
 
             $token = $gateway->clientToken()->generate();
@@ -43,6 +44,14 @@ class SponsorshipController extends Controller
 
     public function checkout(Request $request)
     {
+        $request->validate([
+            "sponsorship_id" => "required|exists:sponsorships,id",
+            "apartment_id" => "required|exists:apartments,id"
+        ], [
+            "sponsorship_id.required" => "The sponsorship is invalid, please retry again!",
+            "sponsorship_id.exists" => "The sponsorship is invalid, please retry again!",
+        ]);
+
         $sponsorship = Sponsorship::where("id", $request->sponsorship_id)->first();
         $apartment = Apartment::where("id", $request->apartment_id)->first();
 
@@ -50,7 +59,7 @@ class SponsorshipController extends Controller
             'environment' => getenv('BT_ENVIRONMENT'),
             'merchantId' => getenv('BT_MERCHANT_ID'),
             'publicKey' => getenv('BT_PUBLIC_KEY'),
-            'privateKey' => getenv('BT_PRIVATE_KEY')
+            'privateKey' => getenv('BT_PRIVATE_KEY'),
         ]);
 
 
