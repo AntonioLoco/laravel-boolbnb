@@ -1,21 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-4">
+    <div id="login" class="container-fluid p-4">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-5">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                    <div class="card-text text-center">
+                        <img id="login-img" class="icon" src="{{ asset('storage/icons_svg/login.svg') }}" alt="">
+                        <h3 class="mt-3">Login</h3>
+                        <p>Enter your email and password</p>
+                    </div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}" id="formLogin">
                             @csrf
 
                             <div class="mb-4 row">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
                                 <div class="col-md-6">
+                                    <label for="email"
+                                        class="col-md-5 col-form-label text-md-right">{{ __('Email') }}</label>
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -32,10 +35,9 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
                                 <div class="col-md-6">
+                                    <label for="password"
+                                        class="col-md-8 col-form-label text-md-right">{{ __('Password') }}</label>
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="current-password">
@@ -54,7 +56,14 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <div class="col-md-6 offset-md-4">
+                                <div class="col-md-10 offset-md-4">
+                                    <span>Don't have an account?</span>
+                                    <a class="register ms-2" href="{{ route('register') }}">Sign Up</a>
+                                </div>
+                            </div>
+
+                            {{-- <div class="mb-4 row">
+                                <div class="col-md-10 offset-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
@@ -64,11 +73,11 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="mb-4 row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                <div class="col-md-10 d-flex justify-content-center">
+                                    <button type="submit" id="login-btn" class="btn">
                                         {{ __('Login') }}
                                     </button>
                                 </div>
