@@ -16,7 +16,7 @@
                             @csrf
 
                             <div class="mb-3 row">
-                                <div class="col-4 col-xs-2 col-sm-4 col-md-5">
+                                <div class="col-6 col-xs-2 col-sm-4 col-md-5">
                                     <label for="name" class="col-form-label">{{ __('Name') }}</label>
 
                                     <input id="name" type="text"
@@ -29,7 +29,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-4 col-sm-4 col-md-5">
+                                <div class="col-6 col-sm-4 col-md-5">
                                     <label for="lastname" class="col-form-label text-md-right">{{ __('Lastname') }}</label>
                                     <input id="lastname" type="text"
                                         class="form-control @error('lastname') is-invalid @enderror" name="lastname"
@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="mb-3 row">
-                                <div class="col-8 col-sm-8 col-md-10">
+                                <div class="col-12 col-sm-8 col-md-10">
                                     <label for="date_of_birth"
                                         class="col-form-label text-md-right">{{ __('Date of Birth') }}</label>
 
@@ -62,7 +62,27 @@
                             </div>
 
                             <div class="mb-3 row">
-                                <div class="col-8 col-sm-8 col-md-5">
+                                <div class="col-12 col-sm-8 col-md-10">
+                                    <label for="email"
+                                        class="col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autocomplete="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                    <span class="invalid-feedback d-block d-none" role="alert" id="alert-email">
+                                        <strong>The email is incorrect!</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <div class="col-6 col-xs-2 col-sm-4 col-md-5">
                                     <label for="password"
                                         class="col col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -80,7 +100,7 @@
                                         <strong id="text-alert-password-first"></strong>
                                     </span>
                                 </div>
-                                <div class="col-8 col-sm-8 col-md-5">
+                                <div class="col-6 col-xs-2 col-sm-4 col-md-5">
                                     <label for="password-confirm"
                                         class="col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
@@ -95,7 +115,7 @@
                             </div>
 
                             <div class="mb-3 row">
-                                <div class="col-8 col-sm-8 col-md-10">
+                                <div class="col-10 col-sm-8 col-md-10">
                                     <span>Already have an account?</span>
                                     <a class="bottom-color ms-2" href="{{ route('login') }}">Login</a>
                                 </div>
