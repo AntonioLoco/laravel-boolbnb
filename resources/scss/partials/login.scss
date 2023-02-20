@@ -1,16 +1,21 @@
-#login {
+#login,
+#register {
     width: 100%;
     height: calc(100vh - var(--header-height));
     background-color: var(--bgGrey);
 
-    #login-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    #icon-img {
         width: 70px;
         height: 70px;
     }
 
     .card {
-        width: 100%;
-        min-width: 400px;
+        min-width: 500px;
+        max-height: 700px;
     }
 
     .card-text {
@@ -31,13 +36,29 @@
         }
     }
 
-    .register {
+    .bottom-color {
         border-bottom: 1px solid var(--darkBlue);
+    }
+
+    a:hover {
+        color: var(--primaryMain);
     }
 
     .btn {
         width: 250px;
+        height: 40px;
         background-color: var(--darkBlue);
         color: white;
+        transition: background-color 1s ease;
+    }
+
+    .btn:hover {
+        background-color: var(--primaryMain);
+    }
+
+    @media screen and (max-width: 520px) {
+        .card {
+            min-width: 400px;
+        }
     }
 }
