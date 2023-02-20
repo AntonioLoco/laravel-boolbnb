@@ -49,8 +49,15 @@
                                                     }
                                                 }
                                             @endphp
-                                            <h5>Daily average: <strong>
-                                                    {{ $apartment->messages->count() / count($dailyMessage) }}</strong></h5>
+                                            <h5>Daily average:
+                                                <strong>
+                                                    @if (count($dailyMessage) === 0)
+                                                        {{ '0' }}
+                                                    @else
+                                                        {{ ceil($apartment->messages->count() / count($dailyMessage)) }}
+                                                    @endif
+                                                </strong>
+                                            </h5>
                                         </div>
                                     </section>
                                     {{-- Views --}}
@@ -70,9 +77,15 @@
                                                     }
                                                 }
                                             @endphp
-                                            <h5>Daily average: <strong>
-                                                    {{ $apartment->views->count() / count($dailyViews) }}
-                                                </strong></h5>
+                                            <h5>Daily average:
+                                                <strong>
+                                                    @if (count($dailyViews) === 0)
+                                                        {{ '0' }}
+                                                    @else
+                                                        {{ ceil($apartment->views->count() / count($dailyViews)) }}
+                                                    @endif
+                                                </strong>
+                                            </h5>
                                         </div>
                                     </section>
                                 </td>

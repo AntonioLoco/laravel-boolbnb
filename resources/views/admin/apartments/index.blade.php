@@ -59,11 +59,17 @@
 
                         </td>
                         <td>
-                            <a href="{{ route('admin.apartment.message', $apartment->slug) }}"
-                                class="btn btn-outline {{ $apartment->messages->count() == 0 ? 'd-none' : '' }}">
-                                <i class="fa-solid fa-message"></i>
-                                {{ $apartment->messages->count() }}
-                            </a>
+                            @if ($apartment->messages->count() == 0)
+                                <div>
+                                    <i class="fa-solid fa-message"></i>
+                                    0
+                                </div>
+                            @else
+                                <a href="{{ route('admin.apartment.message', $apartment->slug) }}" class="btn btn-outline">
+                                    <i class="fa-solid fa-message"></i>
+                                    {{ $apartment->messages->count() }}
+                                </a>
+                            @endif
                         </td>
                         <td>
                             <ul class="d-flex align-items-center justify-content-center p-0 m-0">

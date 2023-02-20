@@ -10,7 +10,49 @@
                 $dailyMessage[$message->created_at->toDateString()] = 1;
             }
         }
-        $jsonString = json_encode($dailyMessage);
+        
+        // Crea un array vuoto per i mesi
+        $arrayMesi = [];
+        
+        // Itera sull'array di date e valori
+foreach ($dailyMessage as $data => $valore) {
+    // Converti la data in timestamp Unix
+    $timestamp = strtotime($data);
+    // Ottieni il mese corrispondente al timestamp
+    $mese = date('Y-m', $timestamp);
+    // Aggiungi il valore al mese corrispondente nell'array dei mesi
+            if (isset($arrayMesi[$mese])) {
+                $arrayMesi[$mese] += $valore;
+            } else {
+                $arrayMesi[$mese] = $valore;
+            }
+        }
+        
+        $dailyViews = [];
+        foreach ($apartment->views as $view) {
+            if (array_key_exists($view->created_at->toDateString(), $dailyViews)) {
+                $dailyViews[$view->created_at->toDateString()]++;
+            } else {
+                $dailyViews[$view->created_at->toDateString()] = 1;
+            }
+        }
+        
+        // Crea un array vuoto per i mesi
+        $arrayViewsMesi = [];
+        
+        // Itera sull'array di date e valori
+foreach ($dailyViews as $data => $valore) {
+    // Converti la data in timestamp Unix
+    $timestamp = strtotime($data);
+    // Ottieni il mese corrispondente al timestamp
+    $mese = date('Y-m', $timestamp);
+    // Aggiungi il valore al mese corrispondente nell'array dei mesi
+            if (isset($arrayViewsMesi[$mese])) {
+                $arrayViewsMesi[$mese] += $valore;
+            } else {
+                $arrayViewsMesi[$mese] = $valore;
+            }
+        }
     @endphp
     <div class="container">
         <div class="row mt-5 d-flex justify-content-center">
@@ -70,30 +112,77 @@
                 }
 
                 //DATA MESSAGE
-                const dateMessage = {!! json_encode($dailyMessage) !!};
-                // const dateMessage = Object.keys(dateMessage);
-                const raggruppatiPerMese = {};
+                const dateMessage = {!! json_encode($arrayMesi) !!};
+                const numMessage = [];
+                const dateOfMessage = Object.keys(dateMessage);
 
+                const maxDateMessage = new Date(Math.max(...dateOfMessage.map(d => new Date(`${d}-01`).getTime())));
+                const minDateMessage = new Date(Math.min(...dateOfMessage.map(d => new Date(`${d}-01`).getTime())));
+                const numYearsMessage = maxDateMessage.getFullYear() - minDateMessage.getFullYear() + 1;
 
-                Object.keys(dateMessage).forEach((chiave) => {
-                    const data = new Date(chiave);
-                    const mese = data.getMonth();
+                for (let y = 0; y < numYearsMessage; y++) {
+                    const year = minDateMessage.getFullYear() + y;
+                    const startMonth = y === 0 ? minDateMessage.getMonth() : 0;
+                    const endMonth = y === numYearsMessage - 1 ? maxDateMessage.getMonth() : 11;
 
-                    if (!raggruppatiPerMese[mese]) {
-                        raggruppatiPerMese[mese] = {};
+                    for (let m = startMonth; m <= endMonth; m++) {
+                        const newDateString = `${year}-${String(m + 1).padStart(2, '0')}`;
+                        if (!dateOfMessage.includes(newDateString)) {
+                            dateOfMessage.push(newDateString);
+                        }
                     }
+                }
 
-                    raggruppatiPerMese[mese][chiave] = dateMessage[chiave];
+                dateOfMessage.sort();
+
+                dateOfMessage.forEach(chiave => {
+                    if (dateMessage[chiave]) {
+                        numMessage.push(dateMessage[chiave]);
+                    } else {
+                        numMessage.push(0);
+                    }
                 });
 
-                console.log(raggruppatiPerMese);
+                const dataAscisseMsg = dateOfMessage;
+                const dataOrdinateMsg = [...numMessage, 10];
+                const backgroundColorMsg = ['#D61C4E'];
 
-                const dataAscisseMsg = [""];
-                const dataOrdinateMsg = [15, 10, 5, 2, 20, 30, 40];
-                const backgroundColorMsg = ['#ff6385e4'];
+
                 //DATA VIEWS
-                const dataAscisseView = ['Lun', 'Mart', 'Mer', 'Gio', 'Ven'];
-                const dataOrdinateView = [200, 50, 100, 150, 230, 300, 350];
+
+                const dateViews = {!! json_encode($arrayViewsMesi) !!};
+                const numViews = [];
+                const dateOfViews = Object.keys(dateViews);
+
+                const maxDate = new Date(Math.max(...dateOfViews.map(d => new Date(`${d}-01`).getTime())));
+                const minDate = new Date(Math.min(...dateOfViews.map(d => new Date(`${d}-01`).getTime())));
+                const numYears = maxDate.getFullYear() - minDate.getFullYear() + 1;
+
+                for (let y = 0; y < numYears; y++) {
+                    const year = minDate.getFullYear() + y;
+                    const startMonth = y === 0 ? minDate.getMonth() : 0;
+                    const endMonth = y === numYears - 1 ? maxDate.getMonth() : 11;
+
+                    for (let m = startMonth; m <= endMonth; m++) {
+                        const newDateString = `${year}-${String(m + 1).padStart(2, '0')}`;
+                        if (!dateOfViews.includes(newDateString)) {
+                            dateOfViews.push(newDateString);
+                        }
+                    }
+                }
+
+                dateOfViews.sort();
+
+                dateOfViews.forEach(chiave => {
+                    if (dateViews[chiave]) {
+                        numViews.push(dateViews[chiave]);
+                    } else {
+                        numViews.push(0);
+                    }
+                });
+
+                const dataAscisseView = dateOfViews;
+                const dataOrdinateView = [...numViews, 10];
                 const backgroundColorView = ['#4bc0c0'];
 
 
@@ -123,7 +212,7 @@
                         title: {
                             display: true,
                             text: 'Messages',
-                            color: '#ff6384',
+                            color: '#D61C4E',
                             font: {
                                 size: 22,
                             },
@@ -147,8 +236,6 @@
                         },
                     }
                 }
-
-
 
                 //OBJECT VIEWS
                 const dataView = {
