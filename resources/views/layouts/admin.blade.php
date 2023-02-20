@@ -118,6 +118,28 @@
                 </main>
             </div>
         </div>
+        <footer class="d-flex justify-content-between align-items-center container-fluid">
+            <div>
+                <h6 class="fw-bolder m-0">Copyright 2023 Boolbnb, Inc | All Rights Reserved</h6>
+            </div>
+            <ul class="socials-icons d-flex justify-content-between m-0">
+                <li class="me-3">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </li>
+                <li class="me-3">
+                    <i class="fa-brands fa-twitter"></i>
+                </li>
+                <li class="me-3">
+                    <i class="fa-brands fa-youtube"></i>
+                </li>
+                <li class="me-3">
+                    <i class="fa-brands fa-instagram"></i>
+                </li>
+                <li>
+                    <i class="fa-brands fa-linkedin"></i>
+                </li>
+            </ul>
+        </footer>
     </div>
 </body>
 
