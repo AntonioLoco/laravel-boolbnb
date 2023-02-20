@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Category;
 use App\Models\Service;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -77,11 +78,18 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function show($slug)
+    public function show($slug, Request $request)
     {
         $apartment = Apartment::with(['services', 'address'])->where('slug', $slug)->first();
 
         if ($apartment) {
+            if ($request->has("ip_address")) {
+                $view = View::create([
+                    "apartment_id" => $apartment->id,
+                    "ip_address" => $request->ip_address
+                ]);
+                $apartment->views()->save($view);
+            }
             return response()->json([
                 "success" => true,
                 "apartment" => $apartment,

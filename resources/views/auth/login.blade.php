@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="login" class="container-fluid p-4">
-        <div class="row justify-content-center">
+    <div id="login" class="container-fluid">
+        <div class="row">
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-text text-center">
-                        <img id="login-img" class="icon" src="{{ asset('storage/icons_svg/login.svg') }}" alt="">
+                        <img id="icon-img" class="icon" src="{{ asset('storage/icons_svg/login.svg') }}" alt="">
                         <h3 class="mt-3">Login</h3>
                         <p>Enter your email and password</p>
                     </div>
@@ -16,7 +16,7 @@
                             @csrf
 
                             <div class="mb-4 row">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <label for="email"
                                         class="col-md-5 col-form-label text-md-right">{{ __('Email') }}</label>
                                     <input id="email" type="email"
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <label for="password"
                                         class="col-md-8 col-form-label text-md-right">{{ __('Password') }}</label>
                                     <input id="password" type="password"
@@ -56,9 +56,9 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <div class="col-md-10 offset-md-4">
+                                <div class="col-md-8">
                                     <span>Don't have an account?</span>
-                                    <a class="register ms-2" href="{{ route('register') }}">Sign Up</a>
+                                    <a class="bottom-color ms-2" href="{{ route('register') }}">Sign Up</a>
                                 </div>
                             </div>
 
