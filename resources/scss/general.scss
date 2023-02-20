@@ -28,7 +28,7 @@ textarea {
 
 main {
     position: relative;
-    height: calc(100vh - var(--header-height));
+    height: calc(100vh - (var(--header-height) + var(--footer-height)));
 }
 
 ul {
@@ -69,7 +69,7 @@ input[type=number]::-webkit-outer-spin-button {
 .sidebar {
     padding-top: 2rem;
     background-color: var(--bgGrey);
-    height: calc(100vh - 80px);
+    height: calc(100vh - (var(--header-height) + var(--footer-height)));
 
     ul {
         padding: 0;

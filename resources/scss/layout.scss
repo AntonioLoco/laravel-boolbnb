@@ -15,4 +15,14 @@
             height: var(--header-height);
         }
     }
+
+    footer{
+        height: var(--footer-height);
+
+        i {
+            padding: .5rem;
+            font-size: 1.2rem;
+            background-color: var(--lightGrey);
+        }
+    }
 }
