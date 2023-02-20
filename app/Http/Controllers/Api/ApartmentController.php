@@ -33,10 +33,12 @@ class ApartmentController extends Controller
             }
 
 
-            $apartments = Apartment::with(['services'])
+            $apartments = Apartment::with(['services', 'sponsorships'])
                 ->join('addresses', 'apartments.id', '=', 'addresses.apartment_id')
                 ->selectRaw("apartments.*, ( 6371 * acos( cos( radians({$latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$longitude}) ) + sin( radians({$latitude}) ) * sin( radians( latitude ) ) ) ) AS distance")
-                ->havingRaw("distance < {$range}");
+                ->havingRaw("distance < {$range}")
+                ->leftJoin('apartment_sponsorship', 'apartments.id', '=', 'apartment_sponsorship.apartment_id')
+                ->orderBy('is_active', 'desc');
 
             if ($request->has('rooms_number')) {
                 $rooms_number = $request->rooms_number;
@@ -57,7 +59,10 @@ class ApartmentController extends Controller
 
             $apartments = $apartments->orderBy('distance')->get();
         } else {
-            $apartments = Apartment::with(['services', 'address'])->get();
+            $apartments = Apartment::with(['services', 'address', 'sponsorships'])
+                ->leftJoin('apartment_sponsorship', 'apartments.id', '=', 'apartment_sponsorship.apartment_id')
+                ->where('is_active', 1)
+                ->get();
         }
 
         $categories = Category::all();
