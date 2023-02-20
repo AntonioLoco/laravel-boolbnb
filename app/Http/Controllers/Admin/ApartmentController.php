@@ -161,6 +161,12 @@ class ApartmentController extends Controller
             $form_data["cover_image"] = $path;
         }
 
+        if ($request->has('visible')) {
+            $form_data['visible'] = 1;
+        } else {
+            $form_data['visible'] = 0;
+        }
+
         $apartment->update($form_data);
 
         if (

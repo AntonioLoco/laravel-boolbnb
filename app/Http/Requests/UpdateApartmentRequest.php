@@ -33,7 +33,7 @@ class UpdateApartmentRequest extends FormRequest
             'bathrooms_number' => 'required|numeric',
             'square_meters' => 'required|numeric',
             'cover_image' => 'max:255|image',
-            'visible' => 'boolean',
+            'visible' => 'nullable|boolean',
             'category_id' => 'exists:categories,id',
             'services' => 'exists:services,id',
             'latitude' => 'numeric',
