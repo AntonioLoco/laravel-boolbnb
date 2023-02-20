@@ -103,8 +103,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href=""
-                                    class="sidebar__link {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }}">
+                                <a href="{{ route('admin.report') }}"
+                                    class="sidebar__link {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }} {{ Route::currentRouteName() === 'admin.report' ? 'cl-primary' : '' }}"">
                                     <i class="fa-solid fa-chart-simple icon"></i>
                                     <span class="d-none d-lg-block">Report</span>
                                 </a>

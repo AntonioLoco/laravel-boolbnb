@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SponsorshipController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Sponsorship;
@@ -36,9 +37,11 @@ Route::middleware(['auth', 'verified'])
         Route::resource('apartments', ApartmentController::class)->parameters(["apartments" => "apartment:slug"]);
         Route::get("/{apartment}/message", [MessageController::class, "index"])->name('apartment.message');
 
-
         Route::get('/{apartment}/sponsorship', [SponsorshipController::class, 'create'])->name('apartment.sponsorship');
         Route::post("/apartment/checkout", [SponsorshipController::class, "checkout"])->name("apartment.checkout");
+
+        Route::get('/report', [ReportController::class, 'index'])->name('report');
+        Route::get('/{apartment}/report', [ReportController::class, 'show'])->name('apartment.report');
     });
 
 
