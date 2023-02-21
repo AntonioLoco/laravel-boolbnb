@@ -59,14 +59,14 @@ foreach ($dailyViews as $data => $valore) {
 
             {{-- Back to all---->CAMBIO HREF-ROUTE --}}
             <div class="col-10">
-                <div class="text-end">
+                <div class="text-center text-sm-end">
                     <a href="{{ route('admin.report') }}" class="btn btn-outline-secondary">Back to all reports</a>
                 </div>
             </div>
             {{-- Back to all --}}
 
             {{-- Title ---->CAMBIO <h2> NOME APARTMENT --}}
-            <div class="col-12 d-flex justify-content-center">
+            <div class="col-12 d-flex justify-content-center mt-5">
                 <div class="text-center border-bottom border-2 w-75">
                     <h5 class="fs-6 fw-lighter">REPORT</h5>
                     <h2 class="fs-2 fw-bold">{{ $apartment->title }}</h2>
