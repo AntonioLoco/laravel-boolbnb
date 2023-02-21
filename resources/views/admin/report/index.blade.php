@@ -28,17 +28,18 @@
                         {{-- Foreach --}}
                         @foreach ($apartments as $apartment)
                             <tr>
-                                <td class="pt-4">
+                                <td>
                                     <h5>{{ $apartment->title }}</h5>
                                 </td>
-                                <td>
+                                <td class="pb-0">
                                     {{-- Messages --}}
-                                    <section class="d-flex border-bottom border-2 py-3">
+                                    <section class="d-flex border-bottom border-2 ">
                                         <div class="d-flex justify-content-center align-items-center px-3">
                                             <i class="fa-solid fa-envelope-open-text fa-lg d-none d-lg-block d-md-none"></i>
                                         </div>
                                         <div>
-                                            <h5>Tot received msg: <strong> {{ $apartment->messages->count() }}</strong></h5>
+                                            <h5>Total messages received: <strong>
+                                                    {{ $apartment->messages->count() }}</strong></h5>
                                             @php
                                                 $dailyMessage = [];
                                                 foreach ($apartment->messages as $message) {
@@ -61,12 +62,14 @@
                                         </div>
                                     </section>
                                     {{-- Views --}}
-                                    <section class="d-flex py-3">
+                                    <section class="d-flex align-items-center mt-1">
                                         <div class="d-flex justify-content-center align-items-center px-3">
                                             <i class="fa-regular fa-eye fa-lg d-none d-lg-block d-md-none"></i>
                                         </div>
                                         <div>
-                                            <h5>Tot received views: <strong> {{ $apartment->views->count() }} </strong></h5>
+                                            <h5 class="mb-0">Total views accumulated: <strong>
+                                                    {{ $apartment->views->count() }} </strong>
+                                            </h5>
                                             @php
                                                 $dailyViews = [];
                                                 foreach ($apartment->views as $view) {
