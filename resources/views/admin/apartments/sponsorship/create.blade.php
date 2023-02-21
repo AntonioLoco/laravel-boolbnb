@@ -123,7 +123,12 @@
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="reset" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
 
-                            <button type="submit" class="btn btn-danger">Confirm Payment</button>
+                            <button type="submit" class="btn btn-danger" id="confirm-payment">Confirm Payment</button>
+
+                            {{-- Loader Btn --}}
+                            <div class="spinner-border text-danger ms-3" role="status" id="confirm-payment-loading">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
                         </div>
                         {{-- /Modal-footer --}}
                     </form>
@@ -141,6 +146,10 @@
         const cardNumber = document.querySelector("#card-number");
         const expiryNumber = document.querySelector("#expiration-date");
         const cvvNumber = document.querySelector("#cvv");
+        //BTN Confirm payment + loading
+        const confirmBtn = document.getElementById('confirm-payment');
+        const confirmBtnLoading = document.getElementById('confirm-payment-loading');
+        confirmBtnLoading.classList.add('d-none');
 
         braintree.client.create({
             authorization: '{{ $token }}'
@@ -232,6 +241,10 @@
                             "{{ $apartment->id }}";
                         document.querySelector('#nonce').value = payload.nonce;
                         form.submit();
+
+                        //BTN Confirm payment + loading
+                        confirmBtnLoading.classList.remove('d-none');
+                        confirmBtn.classList.add('d-none');
                     });
                 }, false);
             });
