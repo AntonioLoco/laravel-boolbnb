@@ -76,20 +76,20 @@ foreach ($dailyViews as $data => $valore) {
             {{-- / Title --}}
 
             {{-- Grafici --}}
-            <div class="col-10 ">
-                {{-- Message --}}
-                <section class="border-bottom border-2 pb-5">
-                    <div>
-                        <canvas id="msgChart"></canvas>
-                    </div>
-                </section>
-                {{-- View --}}
-                <section class="border-bottom border-2 pb-5"">
-                    <div>
-                        <canvas id="viewChart"></canvas>
-                    </div>
-                </section>
-            </div>
+            {{-- Message --}}
+            <section class="pb-5">
+                <div class="chart-box">
+                    <canvas class="chart" id="msgChart"></canvas>
+                </div>
+            </section>
+            {{-- View --}}
+            <div class="col-10 border-bottom"></div>
+            <section>
+                <div class='chart-box'>
+                    <canvas id="viewChart"></canvas>
+                </div>
+            </section>
+
             {{-- / Grafici --}}
 
             {{-- Script --}}
@@ -105,10 +105,10 @@ foreach ($dailyViews as $data => $valore) {
                 Chart.defaults.font.size = 16; //font size
                 Chart.defaults.font.family = 'Poppins'; //font family
                 let paddingLayout = {
-                    left: 20,
-                    right: 20,
-                    bottom: 20,
-                    top: 20,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    top: 0,
                 }
 
                 //DATA MESSAGE
@@ -201,6 +201,7 @@ foreach ($dailyViews as $data => $valore) {
 
                 const optionsMsg = {
                     responsive: true,
+                    maintainAspectRatio: false,
                     layout: {
                         padding: paddingLayout,
                     },
@@ -250,6 +251,7 @@ foreach ($dailyViews as $data => $valore) {
                 };
                 const optionsView = {
                     responsive: true,
+                    maintainAspectRatio: false,
                     layout: {
                         padding: paddingLayout,
                     },
