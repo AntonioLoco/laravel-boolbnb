@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('storage/favicon-bb.svg') }}" />
     <title>Boolbnb</title>
 
     {{-- VITE --}}
@@ -25,14 +26,7 @@
                         </div>
                     </a>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+                    <div>
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
                             <!-- Authentication Links -->
@@ -46,27 +40,9 @@
                                     </li>
                                 @endif
                             @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <i class="fa-solid fa-user"></i>
-                                        {{ Auth::user()->name }}
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item"
-                                            href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
+                                <li class="nav-item pe-2" style="pointer-events: none;">
+                                    <i class="fa-solid fa-user"></i>
+                                    {{ Auth::user()->name }}
                                 </li>
                             @endguest
                         </ul>
@@ -78,7 +54,7 @@
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 {{-- Sidebar --}}
-                <div class="sidebar col col-md-2 d-md-block">
+                <div class="sidebar col col-md-2 d-md-block ps-4 pt-5">
                     <div class="sidebar__container container">
                         <ul>
                             <li>
@@ -108,6 +84,20 @@
                                     <i class="fa-solid fa-chart-simple icon"></i>
                                     <span class="d-none d-lg-block">Report</span>
                                 </a>
+                            </li>
+
+                            {{-- Logout --}}
+                            <li class="border-top border-4 pt-5">
+                                <a class="sidebar__link " href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    <i class="fa-solid fa-right-from-bracket fs-4"></i>
+                                    <span class="d-none d-lg-block">Logout</span>
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
                     </div>
