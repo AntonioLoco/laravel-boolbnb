@@ -16,12 +16,12 @@
 
             {{-- Table --}}
             <div class="col-sm-4 col-md-8 mt-5 d-flex justify-content-center">
-                <table class="table table-bordered table-md">
+                <table class="table table-bordered table-md align-middle">
                     <thead>
-                        <tr class="bg-light">
-                            <th scope="col">Apartments</th>
-                            <th scope="col">Data</th>
-                            <th scope="col"> See Graphs</th>
+                        <tr class="bg-light align-middle">
+                            <th scope="col" class="text-center">Apartments</th>
+                            <th scope="col" class="text-center d-none d-sm-table-cell">Data</th>
+                            <th scope="col" class="text-center">See Graphs</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,12 +29,12 @@
                         @foreach ($apartments as $apartment)
                             <tr>
                                 <td>
-                                    <h5>{{ $apartment->title }}</h5>
+                                    <h5 class="text-center">{{ $apartment->title }}</h5>
                                 </td>
-                                <td class="pb-0">
+                                <td class="pb-0 d-none d-sm-table-cell align-middle">
                                     {{-- Messages --}}
                                     <section class="d-flex border-bottom border-2 ">
-                                        <div class="d-flex justify-content-center align-items-center px-3">
+                                        <div class="d-flex justify-content-center align-items-center px-2 px-lg-3">
                                             <i class="fa-solid fa-envelope-open-text fa-lg d-none d-lg-block d-md-none"></i>
                                         </div>
                                         <div>
@@ -63,8 +63,8 @@
                                     </section>
                                     {{-- Views --}}
                                     <section class="d-flex align-items-center mt-1">
-                                        <div class="d-flex justify-content-center align-items-center px-3">
-                                            <i class="fa-regular fa-eye fa-lg d-none d-lg-block d-md-none"></i>
+                                        <div class="d-flex justify-content-center align-items-center px-2 px-lg-3">
+                                            <i class="fa-regular fa-eye fa-lg d-none d-lg-block d-md-none "></i>
                                         </div>
                                         <div>
                                             <h5 class="mb-0">Total views accumulated: <strong>
@@ -93,12 +93,16 @@
                                     </section>
                                 </td>
                                 {{-- Button GRAPHS --> linkare show graph singolo apartamento  --}}
-                                <td class="text-center pt-5">
-                                    <a class="btn btn-outline-dark"
-                                        href="{{ route('admin.apartment.report', $apartment->slug) }}">
-                                        <i class="fa-solid fa-chart-line"></i>
-                                        Graphs
-                                    </a>
+                                <td>
+                                    <ul class="w-100 h-100 d-flex align-items-center justify-content-center p-0 m-0">
+                                        <li>
+                                            <a class="btn btn-outline-dark"
+                                                href="{{ route('admin.apartment.report', $apartment->slug) }}">
+                                                <i class="fa-solid fa-chart-line"></i>
+                                                Graphs
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                         @endforeach

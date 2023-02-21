@@ -112,7 +112,7 @@
             <div>
                 <h6 class="fw-bolder m-0">Copyright 2023 Boolbnb, Inc | All Rights Reserved</h6>
             </div>
-            <ul class="socials-icons d-flex justify-content-between m-0">
+            <ul class="socials-icons  justify-content-between m-0 d-none d-sm-flex">
                 <li class="me-3">
                     <i class="fa-brands fa-facebook-f"></i>
                 </li>

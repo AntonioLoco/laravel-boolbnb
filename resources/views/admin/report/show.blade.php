@@ -202,6 +202,18 @@ foreach ($dailyViews as $data => $valore) {
                 const optionsMsg = {
                     responsive: true,
                     maintainAspectRatio: false,
+                    // transitions: {
+                    //     show: {
+                    //         animations: {
+                    //             x: {
+                    //                 from: 0
+                    //             },
+                    //             y: {
+                    //                 from: 0
+                    //             }
+                    //         }
+                    //     },
+                    // }
                     layout: {
                         padding: paddingLayout,
                     },
