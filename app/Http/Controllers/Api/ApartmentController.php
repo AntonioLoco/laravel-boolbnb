@@ -59,6 +59,7 @@ class ApartmentController extends Controller
             }
 
             $apartments = $apartments->get();
+            $apartments = $apartments->sortBy("distance");
             $apartments = $apartments->sortByDesc("is_active");
             $apartments = $apartments->unique();
         } else {

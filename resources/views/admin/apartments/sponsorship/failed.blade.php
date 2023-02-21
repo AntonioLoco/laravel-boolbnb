@@ -11,7 +11,7 @@
                     Back to sponsorship
                 </a>
                 <a href="{{ route('admin.dashboard') }}" class="btn ms-btn-payment-failed mt-5">
-                    Contact us
+                    Back to your Dashboard
                 </a>
             </div>
             <div class="col text-center">
