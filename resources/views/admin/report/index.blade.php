@@ -15,7 +15,7 @@
             {{-- / Title --}}
 
             {{-- Table --}}
-            <div class="col-8 mt-5">
+            <div class="col-sm-4 col-md-8 mt-5 d-flex justify-content-center">
                 <table class="table table-bordered table-md">
                     <thead>
                         <tr class="bg-light">
@@ -49,7 +49,7 @@
                                                     }
                                                 }
                                             @endphp
-                                            <h5>Daily average:
+                                            {{-- <h5>Daily average:
                                                 <strong>
                                                     @if (count($dailyMessage) === 0)
                                                         {{ '0' }}
@@ -57,7 +57,7 @@
                                                         {{ ceil($apartment->messages->count() / count($dailyMessage)) }}
                                                     @endif
                                                 </strong>
-                                            </h5>
+                                            </h5> --}}
                                         </div>
                                     </section>
                                     {{-- Views --}}
@@ -77,7 +77,7 @@
                                                     }
                                                 }
                                             @endphp
-                                            <h5>Daily average:
+                                            {{-- <h5>Daily average:
                                                 <strong>
                                                     @if (count($dailyViews) === 0)
                                                         {{ '0' }}
@@ -85,7 +85,7 @@
                                                         {{ ceil($apartment->views->count() / count($dailyViews)) }}
                                                     @endif
                                                 </strong>
-                                            </h5>
+                                            </h5> --}}
                                         </div>
                                     </section>
                                 </td>
