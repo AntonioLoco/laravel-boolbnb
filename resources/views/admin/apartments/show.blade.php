@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="apartments-show container my-5">
+    <div class="apartments-show container my-5 position-relative">
         <div class="text-center text-sm-end mb-3">
             <a href="{{ route('admin.apartments.index') }}" class="btn btn-outline-secondary">
                 Back to All
@@ -20,7 +20,7 @@
         </div>
         <div class="section-description pb-5">
             <div class="row pt-5 border-top border-secondary-subtle">
-                <div class="col-12 col-md-6 d-flex align-items-center border-end border-secondary-subtle ">
+                <div class="col-12 col-md-6 d-flex align-items-center">
                     <ul>
                         <li class="mb-4">
                             <h5 class="d-inline me-4">TITLE:</h5><span>{{ $apartment->title }}</span>
@@ -43,7 +43,7 @@
                     <h5>DESCRIPTION: </h5>
                     <p class="px-4">{{ $apartment->description }}</p>
                 </div>
-                <div class="col-12 col-md-6 my-5 text-center border-end border-secondary-subtle">
+                <div class="col-12 col-md-6 my-5 text-center">
                     <ul>
                         <li class="mb-3">
                             <h5 class="d-inline me-3">SQUARE METERS: </h5>
@@ -107,6 +107,10 @@
                     </ul>
                 </div>
             </div>
+        </div>
+
+        <div class="bg-image position-absolute bottom-0 end-0">
+            <img src="{{ asset('storage/icons_svg/show.svg') }}" alt="">
         </div>
     </div>
 @endsection

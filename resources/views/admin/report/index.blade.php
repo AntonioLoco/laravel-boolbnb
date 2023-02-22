@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container" id="index-report">
+    <div class="container position-relative" id="index-report">
         <div class="row d-flex justify-content-center">
 
             {{-- Title --}}
@@ -112,6 +112,10 @@
                 </table>
             </div>
             {{-- Table --}}
+
+            <div class="bg-image position-absolute bottom-0 end-0 d-flex justify-content-end">
+                <img src="{{ asset('storage/icons_svg/report.svg') }}" alt="" id="bg-image">
+            </div>
         </div>
     </div>
 @endsection
