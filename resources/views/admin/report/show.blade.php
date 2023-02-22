@@ -59,14 +59,14 @@ foreach ($dailyViews as $data => $valore) {
 
             {{-- Back to all---->CAMBIO HREF-ROUTE --}}
             <div class="col-10">
-                <div class="text-end">
+                <div class="text-center text-sm-end">
                     <a href="{{ route('admin.report') }}" class="btn btn-outline-secondary">Back to all reports</a>
                 </div>
             </div>
             {{-- Back to all --}}
 
             {{-- Title ---->CAMBIO <h2> NOME APARTMENT --}}
-            <div class="col-12 d-flex justify-content-center">
+            <div class="col-12 d-flex justify-content-center mt-5">
                 <div class="text-center border-bottom border-2 w-75">
                     <h5 class="fs-6 fw-lighter">REPORT</h5>
                     <h2 class="fs-2 fw-bold">{{ $apartment->title }}</h2>
@@ -76,20 +76,20 @@ foreach ($dailyViews as $data => $valore) {
             {{-- / Title --}}
 
             {{-- Grafici --}}
-            <div class="col-10 ">
-                {{-- Message --}}
-                <section class="border-bottom border-2 pb-5">
-                    <div>
-                        <canvas id="msgChart"></canvas>
-                    </div>
-                </section>
-                {{-- View --}}
-                <section class="border-bottom border-2 pb-5"">
-                    <div>
-                        <canvas id="viewChart"></canvas>
-                    </div>
-                </section>
-            </div>
+            {{-- Message --}}
+            <section class="pb-5">
+                <div class="chart-box">
+                    <canvas class="chart" id="msgChart"></canvas>
+                </div>
+            </section>
+            {{-- View --}}
+            <div class="col-10 border-bottom"></div>
+            <section>
+                <div class='chart-box'>
+                    <canvas id="viewChart"></canvas>
+                </div>
+            </section>
+
             {{-- / Grafici --}}
 
             {{-- Script --}}
@@ -105,10 +105,10 @@ foreach ($dailyViews as $data => $valore) {
                 Chart.defaults.font.size = 16; //font size
                 Chart.defaults.font.family = 'Poppins'; //font family
                 let paddingLayout = {
-                    left: 20,
-                    right: 20,
-                    bottom: 20,
-                    top: 20,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    top: 0,
                 }
 
                 //DATA MESSAGE
@@ -201,6 +201,19 @@ foreach ($dailyViews as $data => $valore) {
 
                 const optionsMsg = {
                     responsive: true,
+                    maintainAspectRatio: false,
+                    // transitions: {
+                    //     show: {
+                    //         animations: {
+                    //             x: {
+                    //                 from: 0
+                    //             },
+                    //             y: {
+                    //                 from: 0
+                    //             }
+                    //         }
+                    //     },
+                    // }
                     layout: {
                         padding: paddingLayout,
                     },
@@ -250,6 +263,7 @@ foreach ($dailyViews as $data => $valore) {
                 };
                 const optionsView = {
                     responsive: true,
+                    maintainAspectRatio: false,
                     layout: {
                         padding: paddingLayout,
                     },

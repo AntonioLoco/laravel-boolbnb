@@ -46,7 +46,7 @@
                                     {{ $sponsor->name }}
                                 @endif
                             @empty
-                                {{ 'Never sponsor' }}
+                                {{ 'Never sponsored' }}
                             @endforelse
 
                             @if ($sponsorNum == 0)
