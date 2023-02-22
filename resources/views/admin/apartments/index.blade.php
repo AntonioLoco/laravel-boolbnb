@@ -60,10 +60,10 @@
                         </td>
                         <td>
                             @if ($apartment->messages->count() == 0)
-                                <div>
+                                <a class="btn btn-outline cursor-denied">
                                     <i class="fa-solid fa-message"></i>
                                     0
-                                </div>
+                                </a>
                             @else
                                 <a href="{{ route('admin.apartment.message', $apartment->slug) }}" class="btn btn-outline">
                                     <i class="fa-solid fa-message"></i>

@@ -50,15 +50,6 @@
                                                     }
                                                 }
                                             @endphp
-                                            {{-- <h5>Daily average:
-                                                <strong>
-                                                    @if (count($dailyMessage) === 0)
-                                                        {{ '0' }}
-                                                    @else
-                                                        {{ ceil($apartment->messages->count() / count($dailyMessage)) }}
-                                                    @endif
-                                                </strong>
-                                            </h5> --}}
                                         </div>
                                     </section>
                                     {{-- Views --}}
@@ -80,15 +71,6 @@
                                                     }
                                                 }
                                             @endphp
-                                            {{-- <h5>Daily average:
-                                                <strong>
-                                                    @if (count($dailyViews) === 0)
-                                                        {{ '0' }}
-                                                    @else
-                                                        {{ ceil($apartment->views->count() / count($dailyViews)) }}
-                                                    @endif
-                                                </strong>
-                                            </h5> --}}
                                         </div>
                                     </section>
                                 </td>
@@ -96,11 +78,18 @@
                                 <td>
                                     <ul class="w-100 h-100 d-flex align-items-center justify-content-center p-0 m-0">
                                         <li>
-                                            <a class="btn btn-outline-dark"
-                                                href="{{ route('admin.apartment.report', $apartment->slug) }}">
-                                                <i class="fa-solid fa-chart-line"></i>
-                                                Graphs
-                                            </a>
+                                            @if ($apartment->views->count() > 0 || $apartment->messages->count() > 0)
+                                                <a class="btn btn-outline-dark"
+                                                    href="{{ route('admin.apartment.report', $apartment->slug) }}">
+                                                    <i class="fa-solid fa-chart-line"></i>
+                                                    Graphs
+                                                </a>
+                                            @else
+                                                <a class="btn btn-outline-dark disabled">
+                                                    <i class="fa-solid fa-chart-line"></i>
+                                                    Graphs
+                                                </a>
+                                            @endif
                                         </li>
                                     </ul>
                                 </td>

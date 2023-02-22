@@ -124,3 +124,7 @@ input[type=number]::-webkit-outer-spin-button {
 .sidebar__link:hover {
     color: var(--primaryMain);
 }
+
+.cursor-denied{
+    cursor: no-drop;
+}
