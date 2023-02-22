@@ -31,9 +31,9 @@
                                 <td>
                                     <h5 class="text-center">{{ $apartment->title }}</h5>
                                 </td>
-                                <td class="pb-0 d-none d-sm-table-cell align-middle">
+                                <td class="p-0 d-none d-sm-table-cell align-middle">
                                     {{-- Messages --}}
-                                    <section class="d-flex border-bottom border-2 ">
+                                    <section class="d-flex border-bottom border-2 p-3">
                                         <div class="d-flex justify-content-center align-items-center px-2 px-lg-3">
                                             <i class="fa-solid fa-envelope-open-text fa-lg d-none d-lg-block d-md-none"></i>
                                         </div>
@@ -62,7 +62,7 @@
                                         </div>
                                     </section>
                                     {{-- Views --}}
-                                    <section class="d-flex align-items-center mt-1">
+                                    <section class="d-flex align-items-center mt-1 p-3">
                                         <div class="d-flex justify-content-center align-items-center px-2 px-lg-3">
                                             <i class="fa-regular fa-eye fa-lg d-none d-lg-block d-md-none "></i>
                                         </div>
