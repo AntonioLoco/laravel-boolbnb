@@ -2,11 +2,17 @@
 
 @section('content')
     <div class="apartments-show container my-5">
+        <div class="text-center text-sm-end mb-3">
+            <a href="{{ route('admin.apartments.index') }}" class="btn btn-outline-secondary">
+                Back to All
+            </a>
+        </div>
         @if (session('message'))
             <div class="alert alert-success mb-5">
                 {{ session('message') }}
             </div>
         @endif
+
         <div class="section-title text-center mb-5">
             <h5>SHOW</h5>
             <h1>{{ $apartment->title }}</h1>
@@ -14,7 +20,7 @@
         </div>
         <div class="section-description pb-5">
             <div class="row pt-5 border-top border-secondary-subtle">
-                <div class="col-12 col-md-6 d-flex align-items-center border-end border-secondary-subtle">
+                <div class="col-12 col-md-6 d-flex align-items-center border-end border-secondary-subtle ">
                     <ul>
                         <li class="mb-4">
                             <h5 class="d-inline me-4">TITLE:</h5><span>{{ $apartment->title }}</span>
