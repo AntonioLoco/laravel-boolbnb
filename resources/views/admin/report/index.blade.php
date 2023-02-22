@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
-        <div class="row mt-5 d-flex justify-content-center">
+    <div class="container" id="index-report">
+        <div class="row d-flex justify-content-center">
 
             {{-- Title --}}
             <div class="col-12 d-flex justify-content-center">

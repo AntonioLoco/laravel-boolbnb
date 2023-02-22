@@ -1,0 +1,12 @@
+#edit-apartment{
+    background-image: url("/storage/app/public/icons_svg/edit.svg");
+    object-fit: contain;
+    background-size: auto;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    position: relative;
+
+    form {
+        margin-bottom: 250px;
+    }
+}

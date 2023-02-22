@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('storage/favicon-bb.svg') }}" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('storage/icons_svg/favicon-bb.svg') }}" />
     <title>Boolbnb</title>
 
     {{-- VITE --}}
@@ -66,7 +66,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.apartments.index') }}"
-                                    class="sidebar__link {{ Route::currentRouteName() === 'admin.apartments.index' ? 'cl-primary' : '' }} {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }}">
+                                    class="sidebar__link {{ ((((Route::currentRouteName() === 'admin.apartments.index' ? 'cl-primary' : Route::currentRouteName() === 'admin.apartments.show') ? 'cl-primary' : Route::currentRouteName() === 'admin.apartments.edit') ? 'cl-primary' : Route::currentRouteName() === 'admin.apartment.message') ? 'cl-primary' : Route::currentRouteName() === 'admin.apartment.sponsorship') ? 'cl-primary' : '' }} {{ Auth::user()->apartments->count() == 0 ? 'd-none' : '' }}">
                                     <i class="fa-solid fa-list icon"></i>
                                     <span class="d-none d-lg-block">Apartments</span>
                                 </a>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
                 {{-- Content --}}
-                <main class="content col-10 col-md-10 overflow-auto">
+                <main class="content col-10 col-md-10 overflow-auto position-relative">
                     @yield('content')
                 </main>
             </div>

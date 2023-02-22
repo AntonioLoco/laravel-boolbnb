@@ -52,7 +52,7 @@
                             @if ($sponsorNum == 0)
                                 <a href="{{ route('admin.apartment.sponsorship', $apartment->slug) }}"
                                     class="btn btn-outline">
-                                    Aggiungi
+                                    Add
                                     <i class="fa-solid fa-plus"></i>
                                 </a>
                             @endif

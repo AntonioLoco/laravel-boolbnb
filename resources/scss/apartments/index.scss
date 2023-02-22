@@ -1,9 +1,11 @@
 #index {
-    height: calc(100vh - var(--header-height));
+    height: 100%;
     background-image: url("/storage/app/public/icons_svg/index.svg");
     object-fit: fill;
     background-position: bottom;
     background-repeat: no-repeat;
+    padding-bottom: 250px;
+    background-size: contain;
 
     display: flex;
     flex-direction: column;

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container mt-3 p-5">
+    <div class="container mt-3 p-5" id="apartment-create">
         <div class="text-center text-sm-end">
             <a href="{{ route('admin.apartments.index') }}" class="btn btn-outline-secondary">
                 Back to All
