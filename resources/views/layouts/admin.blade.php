@@ -42,7 +42,7 @@
                             @else
                                 <li class="nav-item pe-2" style="pointer-events: none;">
                                     <i class="fa-solid fa-user"></i>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->name ? Auth::user()->name : 'user' }}
                                 </li>
                             @endguest
                         </ul>
