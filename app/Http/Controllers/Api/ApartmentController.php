@@ -35,6 +35,7 @@ class ApartmentController extends Controller
 
 
             $apartments = Apartment::with(['services', 'sponsorships'])
+                ->where("visible", 1)
                 ->join('addresses', 'apartments.id', '=', 'addresses.apartment_id')
                 ->selectRaw("apartments.*, ( 6371 * acos( cos( radians({$latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$longitude}) ) + sin( radians({$latitude}) ) * sin( radians( latitude ) ) ) ) AS distance, apartment_sponsorship.is_active AS is_active")
                 ->havingRaw("distance < {$range}")
