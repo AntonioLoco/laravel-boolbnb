@@ -39,7 +39,7 @@
                                         name="sponsorships_value">
                                 </td>
                                 <td>{{ $sponsor->name }}</td>
-                                <td>{{ $sponsor->price }} x {{ $sponsor->hours }}</td>
+                                <td>{{ $sponsor->price }}$ x {{ $sponsor->hours }}h</td>
                             </tr>
                         @endforeach
                     </tbody>
