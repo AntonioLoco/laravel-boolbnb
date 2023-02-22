@@ -3,7 +3,7 @@
 @section('content')
     <div class="apartments-show container my-5 position-relative">
         <div class="text-center text-sm-end mb-3">
-            <a href="{{ route('admin.apartments.index') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('admin.apartments.index') }}" class="btn btn-outline-secondary ms-btn-hover">
                 Back to All
             </a>
         </div>

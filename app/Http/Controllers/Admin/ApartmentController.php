@@ -37,7 +37,8 @@ class ApartmentController extends Controller
     {
         $services = Service::all();
         $categories = Category::all();
-        return view("admin.apartments.create", compact("services", "categories"));
+        $user = Auth::user();
+        return view("admin.apartments.create", compact("services", "categories", "user"));
     }
 
     /**

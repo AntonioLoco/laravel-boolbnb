@@ -128,3 +128,9 @@ input[type=number]::-webkit-outer-spin-button {
 .cursor-denied{
     cursor: no-drop;
 }
+
+
+.ms-btn-hover:hover{
+    background-color: var(--primaryMain);
+    color: var(--bgGrey)
+}

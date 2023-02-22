@@ -60,7 +60,8 @@ foreach ($dailyViews as $data => $valore) {
             {{-- Back to all---->CAMBIO HREF-ROUTE --}}
             <div class="col-10">
                 <div class="text-center text-sm-end">
-                    <a href="{{ route('admin.report') }}" class="btn btn-outline-secondary">Back to all reports</a>
+                    <a href="{{ route('admin.report') }}" class="btn btn-outline-secondary ms-btn-hover">Back to all
+                        reports</a>
                 </div>
             </div>
             {{-- Back to all --}}

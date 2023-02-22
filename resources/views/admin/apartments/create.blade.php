@@ -3,9 +3,15 @@
 @section('content')
     <div class="container mt-3 p-5" id="apartment-create">
         <div class="text-center text-sm-end">
-            <a href="{{ route('admin.apartments.index') }}" class="btn btn-outline-secondary">
-                Back to All
-            </a>
+            @if ($user->apartments->count() > 0)
+                <a href="{{ route('admin.apartments.index') }}" class="btn btn-outline-secondary ms-btn-hover">
+                    Back to All
+                </a>
+            @else
+                <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary ms-btn-hover">
+                    Back to Dashboard
+                </a>
+            @endif
         </div>
         @if ($errors->any())
             <div class="alert alert-danger">

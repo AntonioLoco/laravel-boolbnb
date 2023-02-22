@@ -64,7 +64,7 @@
                             <div class="mb-3 row">
                                 <div class="col-12 col-sm-8 col-md-10">
                                     <label for="email"
-                                        class="col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                        class="col-form-label text-md-right">{{ __('E-Mail Address*') }}</label>
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email">
@@ -84,7 +84,7 @@
                             <div class="mb-3 row">
                                 <div class="col-6 col-xs-2 col-sm-4 col-md-5">
                                     <label for="password"
-                                        class="col col-form-label text-md-right">{{ __('Password') }}</label>
+                                        class="col col-form-label text-md-right">{{ __('Password*') }}</label>
 
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="col-6 col-xs-2 col-sm-4 col-md-5">
                                     <label for="password-confirm"
-                                        class="col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                        class="col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
 
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" autocomplete="new-password">
